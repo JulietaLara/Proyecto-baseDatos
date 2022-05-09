@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import Bases.BaseDatos;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -15,20 +17,20 @@ public class Denuncia {
     private String codigo; 
     private String zona; 
     private String descripcion; 
-    private String recomendaciones; 
     private String estado; 
     private Date fechaRegistro; 
+    private String rutaImagenEvidencia; 
 
     public Denuncia() {
     }
 
-    public Denuncia(String codigo, String zona, String descripcion, String recomendaciones, String estado, Date fechaRegistro) {
+    public Denuncia(String codigo, String zona, String descripcion, String estado, Date fechaRegistro, String rutaImagenEvidencia) {
         this.codigo = codigo;
         this.zona = zona;
         this.descripcion = descripcion;
-        this.recomendaciones = recomendaciones;
         this.estado = estado;
         this.fechaRegistro = fechaRegistro;
+        this.rutaImagenEvidencia = rutaImagenEvidencia;
     }
 
     public String getCodigo() {
@@ -55,14 +57,6 @@ public class Denuncia {
         this.descripcion = descripcion;
     }
 
-    public String getRecomendaciones() {
-        return recomendaciones;
-    }
-
-    public void setRecomendaciones(String recomendaciones) {
-        this.recomendaciones = recomendaciones;
-    }
-
     public String getEstado() {
         return estado;
     }
@@ -79,10 +73,37 @@ public class Denuncia {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public String getRutaImagenEvidencia() {
+        return rutaImagenEvidencia;
+    }
+
+    public void setRutaImagenEvidencia(String rutaImagenEvidencia) {
+        this.rutaImagenEvidencia = rutaImagenEvidencia;
+    }
+
     @Override
     public String toString() {
-        return "Denuncia{" + "codigo=" + codigo + ", zona=" + zona + ", descripcion=" + descripcion + ", recomendaciones=" + recomendaciones + ", estado=" + estado + ", fechaRegistro=" + fechaRegistro + '}';
+        return "Denuncia{" + "codigo=" + codigo + ", zona=" + zona + ", descripcion=" + descripcion + ", estado=" + estado + ", fechaRegistro=" + fechaRegistro + ", rutaImagenEvidencia=" + rutaImagenEvidencia + '}';
     }
     
-    
+    public boolean insertarDenuncia(ArrayList<Denuncia> arrDen){
+        String sql="";
+        BaseDatos objBases=new BaseDatos();
+        boolean conexion=false;
+        boolean insertar=false;
+        
+        sql="INSERT INTO ESTUDIANTES (idestudiantes,codigoestudiante,nombreestudiante,apellidoestudiante,telefonoestudiante,direccionestudiante,correoestudiante,imagenestudiante) VALUES(?,?,?,?,?,?,?,?)";
+        
+        for (Denuncia arrDen1 : arrDen) {
+            conexion=objBases.crearConexion();
+            if (conexion) {
+                insertar = objBases.sqlInsertWithImageDenuncia(arrDen1.getRutaImagenEvidencia(), sql, 
+                        arrDen1.getCodigo(), arrDen1.getDescripcion(), arrDen1.getEstado(), 
+                        arrDen1.getRutaImagenEvidencia(), arrDen1.getZona(), (java.sql.Date) arrDen1.getFechaRegistro()); 
+            }
+        }
+        return insertar;
+    }
+
+   
 }

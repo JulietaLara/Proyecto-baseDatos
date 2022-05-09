@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author Usuario
@@ -12,13 +14,15 @@ package modelo;
 public class Usuario {
     private String nombreUsuario; 
     private String contraseña; 
+    private Date fecha; 
 
     public Usuario() {
     }
 
-    public Usuario(String nombreUsuario, String contraseña) {
+    public Usuario(String nombreUsuario, String contraseña, Date fecha) {
         this.nombreUsuario = nombreUsuario;
         this.contraseña = contraseña;
+        this.fecha = fecha;
     }
 
     public String getNombreUsuario() {
@@ -37,10 +41,20 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "nombreUsuario=" + nombreUsuario + ", contrase\u00f1a=" + contraseña + '}';
+        return "Usuario{" + "nombreUsuario=" + nombreUsuario + ", contrase\u00f1a=" + contraseña + ", fecha=" + fecha + '}';
     }
+
+    
     
     
     

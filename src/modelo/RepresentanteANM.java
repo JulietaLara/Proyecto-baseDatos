@@ -11,9 +11,7 @@ package modelo;
  */
 public class RepresentanteANM {
     private String usuario;
-    private String contraseña; 
-    private String sancion; 
-    private String reporte; 
+    private String contraseña;  
 
     public RepresentanteANM() {
     }
@@ -21,8 +19,6 @@ public class RepresentanteANM {
     public RepresentanteANM(String usuario, String contraseña, String sancion, String reporte) {
         this.usuario = usuario;
         this.contraseña = contraseña;
-        this.sancion = sancion;
-        this.reporte = reporte;
     }
 
     public String getUsuario() {
@@ -41,25 +37,10 @@ public class RepresentanteANM {
         this.contraseña = contraseña;
     }
 
-    public String getSancion() {
-        return sancion;
-    }
-
-    public void setSancion(String sancion) {
-        this.sancion = sancion;
-    }
-
-    public String getReporte() {
-        return reporte;
-    }
-
-    public void setReporte(String reporte) {
-        this.reporte = reporte;
-    }
 
     @Override
     public String toString() {
-        return "RepresentanteANM{" + "usuario=" + usuario + ", contrase\u00f1a=" + contraseña + ", sancion=" + sancion + ", reporte=" + reporte + '}';
+        return "RepresentanteANM{" + "usuario=" + usuario + ", contrase\u00f1a=" + contraseña + '}';
     }
     
     
