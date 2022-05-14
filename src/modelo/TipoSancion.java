@@ -10,47 +10,51 @@ package modelo;
  * @author Usuario
  */
 public class TipoSancion {
-    private String articulo; 
-    private String razones; 
-    private char penaAumentada; 
+    private int idTS;
+    private String nombreTS;
+    private String ArticuloTS;
 
     public TipoSancion() {
     }
 
-    public TipoSancion(String articulo, String razones, char penaAumentada) {
-        this.articulo = articulo;
-        this.razones = razones;
-        this.penaAumentada = penaAumentada;
+    public TipoSancion(int idTS, String nombreTS, String ArticuloTS) {
+        this.idTS = idTS;
+        this.nombreTS = nombreTS;
+        this.ArticuloTS = ArticuloTS;
     }
 
-    public String getArticulo() {
-        return articulo;
+    public int getIdTS() {
+        return idTS;
     }
 
-    public void setArticulo(String articulo) {
-        this.articulo = articulo;
+    public void setIdTS(int idTS) {
+        this.idTS = idTS;
     }
 
-    public String getRazones() {
-        return razones;
+    public String getNombreTS() {
+        return nombreTS;
     }
 
-    public void setRazones(String razones) {
-        this.razones = razones;
+    public void setNombreTS(String nombreTS) {
+        this.nombreTS = nombreTS;
     }
 
-    public char getPenaAumentada() {
-        return penaAumentada;
+    public String getArticuloTS() {
+        return ArticuloTS;
     }
 
-    public void setPenaAumentada(char penaAumentada) {
-        this.penaAumentada = penaAumentada;
+    public void setArticuloTS(String ArticuloTS) {
+        this.ArticuloTS = ArticuloTS;
     }
 
     @Override
     public String toString() {
-        return "TipoSancion{" + "articulo=" + articulo + ", razones=" + razones + ", penaAumentada=" + penaAumentada + '}';
+        return "TipoSancion{" + "idTS=" + idTS + ", nombreTS=" + nombreTS + ", ArticuloTS=" + ArticuloTS + '}';
     }
+    
+    
+
+   
     
     
     

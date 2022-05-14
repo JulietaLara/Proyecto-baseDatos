@@ -6,6 +6,7 @@
 package modelo;
 
 import Bases.BaseDatos;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,96 +15,88 @@ import java.util.Date;
  * @author Usuario
  */
 public class Denuncia {
-    private String codigo; 
-    private String zona; 
-    private String descripcion; 
-    private String estado; 
-    private Date fechaRegistro; 
-    private String rutaImagenEvidencia; 
+    private String codigoD; 
+    private String descripcionD; 
+    private String estadoD; 
+    private Date fechaRegistroD; 
+    private String foto1evidencia; 
 
     public Denuncia() {
     }
 
-    public Denuncia(String codigo, String zona, String descripcion, String estado, Date fechaRegistro, String rutaImagenEvidencia) {
-        this.codigo = codigo;
-        this.zona = zona;
-        this.descripcion = descripcion;
-        this.estado = estado;
-        this.fechaRegistro = fechaRegistro;
-        this.rutaImagenEvidencia = rutaImagenEvidencia;
+    public Denuncia(String codigoD, String descripcionD, String estadoD, Date fechaRegistroD, String foto1evidencia) {
+        this.codigoD = codigoD;
+        this.descripcionD = descripcionD;
+        this.estadoD = estadoD;
+        this.fechaRegistroD = fechaRegistroD;
+        this.foto1evidencia = foto1evidencia;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoD() {
+        return codigoD;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigoD(String codigoD) {
+        this.codigoD = codigoD;
     }
 
-    public String getZona() {
-        return zona;
+    public String getDescripcionD() {
+        return descripcionD;
     }
 
-    public void setZona(String zona) {
-        this.zona = zona;
+    public void setDescripcionD(String descripcionD) {
+        this.descripcionD = descripcionD;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getEstadoD() {
+        return estadoD;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setEstadoD(String estadoD) {
+        this.estadoD = estadoD;
     }
 
-    public String getEstado() {
-        return estado;
+    public Date getFechaRegistroD() {
+        return fechaRegistroD;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setFechaRegistroD(Date fechaRegistroD) {
+        this.fechaRegistroD = fechaRegistroD;
     }
 
-    public Date getFechaRegistro() {
-        return fechaRegistro;
+    public String getFoto1evidencia() {
+        return foto1evidencia;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public String getRutaImagenEvidencia() {
-        return rutaImagenEvidencia;
-    }
-
-    public void setRutaImagenEvidencia(String rutaImagenEvidencia) {
-        this.rutaImagenEvidencia = rutaImagenEvidencia;
+    public void setFoto1evidencia(String foto1evidencia) {
+        this.foto1evidencia = foto1evidencia;
     }
 
     @Override
     public String toString() {
-        return "Denuncia{" + "codigo=" + codigo + ", zona=" + zona + ", descripcion=" + descripcion + ", estado=" + estado + ", fechaRegistro=" + fechaRegistro + ", rutaImagenEvidencia=" + rutaImagenEvidencia + '}';
+        return "Denuncia{" + "codigoD=" + codigoD + ", descripcionD=" + descripcionD + ", estadoD=" + estadoD + ", fechaRegistroD=" + fechaRegistroD + ", foto1evidencia=" + foto1evidencia + '}';
     }
+
+ 
     
-    public boolean insertarDenuncia(ArrayList<Denuncia> arrDen){
-        String sql="";
-        BaseDatos objBases=new BaseDatos();
-        boolean conexion=false;
-        boolean insertar=false;
-        
-        sql="INSERT INTO ESTUDIANTES (idestudiantes,codigoestudiante,nombreestudiante,apellidoestudiante,telefonoestudiante,direccionestudiante,correoestudiante,imagenestudiante) VALUES(?,?,?,?,?,?,?,?)";
-        
-        for (Denuncia arrDen1 : arrDen) {
-            conexion=objBases.crearConexion();
-            if (conexion) {
-                insertar = objBases.sqlInsertWithImageDenuncia(arrDen1.getRutaImagenEvidencia(), sql, 
-                        arrDen1.getCodigo(), arrDen1.getDescripcion(), arrDen1.getEstado(), 
-                        arrDen1.getRutaImagenEvidencia(), arrDen1.getZona(), (java.sql.Date) arrDen1.getFechaRegistro()); 
-            }
-        }
-        return insertar;
-    }
+//    public boolean insertarDenuncia(ArrayList<Denuncia> arrDen){
+//        String sql="";
+//        BaseDatos objBases=new BaseDatos();
+//        boolean conexion=false;
+//        boolean insertar=false;
+//        
+//        sql="INSERT INTO ESTUDIANTES (idestudiantes,codigoestudiante,nombreestudiante,apellidoestudiante,telefonoestudiante,direccionestudiante,correoestudiante,imagenestudiante) VALUES(?,?,?,?,?,?,?,?)";
+//        
+//        for (Denuncia arrDen1 : arrDen) {
+//            conexion=objBases.crearConexion();
+//            if (conexion) {
+//                insertar = objBases.sqlInsertWithImageDenuncia(arrDen1.getFoto1evidencia(), sql, 
+//                        arrDen1.getCodigoD(), arrDen1.getDescripcionD(), arrDen1.getEstadoD(), 
+//                        arrDen1.getFoto1evidencia(), arrDen1.getZona(), (java.sql.Date) arrDen1.getFechaRegistroD()); 
+//            }
+//        }
+//        return insertar;
+//    }
 
    
 }

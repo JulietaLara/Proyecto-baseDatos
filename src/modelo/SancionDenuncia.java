@@ -12,27 +12,38 @@ import java.util.Date;
  * @author Usuario
  */
 public class SancionDenuncia {
-    private Date fechaRegistro; 
-    private int condena; 
-    private int  multa; 
-    private String estado; 
+
+    private int idS;
+    private Date fecharegistroS;
+    private int condena;
+    private double CantidadSM;
+    private String Estado;
 
     public SancionDenuncia() {
     }
 
-    public SancionDenuncia(Date fechaRegistro, int condena, int multa, String estado) {
-        this.fechaRegistro = fechaRegistro;
+    public SancionDenuncia(int idS, Date fecharegistroS, int condena, double CantidadSM, String Estado) {
+        this.idS = idS;
+        this.fecharegistroS = fecharegistroS;
         this.condena = condena;
-        this.multa = multa;
-        this.estado = estado;
+        this.CantidadSM = CantidadSM;
+        this.Estado = Estado;
     }
 
-    public Date getFechaRegistro() {
-        return fechaRegistro;
+    public int getIdS() {
+        return idS;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public void setIdS(int idS) {
+        this.idS = idS;
+    }
+
+    public Date getFecharegistroS() {
+        return fecharegistroS;
+    }
+
+    public void setFecharegistroS(Date fecharegistroS) {
+        this.fecharegistroS = fecharegistroS;
     }
 
     public int getCondena() {
@@ -43,27 +54,25 @@ public class SancionDenuncia {
         this.condena = condena;
     }
 
-    public int getMulta() {
-        return multa;
+    public double getCantidadSM() {
+        return CantidadSM;
     }
 
-    public void setMulta(int multa) {
-        this.multa = multa;
+    public void setCantidadSM(double CantidadSM) {
+        this.CantidadSM = CantidadSM;
     }
 
     public String getEstado() {
-        return estado;
+        return Estado;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
     }
 
     @Override
     public String toString() {
-        return "SancionDenuncia{" + "fechaRegistro=" + fechaRegistro + ", condena=" + condena + ", multa=" + multa + ", estado=" + estado + '}';
+        return "SancionDenuncia{" + "idS=" + idS + ", fecharegistroS=" + fecharegistroS + ", condena=" + condena + ", CantidadSM=" + CantidadSM + ", Estado=" + Estado + '}';
     }
-    
-    
-    
+
 }

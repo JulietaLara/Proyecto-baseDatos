@@ -140,24 +140,23 @@ public class BaseDatos {
                 + "correoestudiante=?,"
                 + "imagenestudiante=? where codigoestudiante = ?";
         PreparedStatement preparedStmt = conexion.prepareStatement(update);
-        preparedStmt.setString(1, denunciamod.getCodigo());
-        preparedStmt.setString(2, denunciamod.getDescripcion());
-        preparedStmt.setString(3, denunciamod.getEstado());
-        preparedStmt.setString(4, denunciamod.getRutaImagenEvidencia());
-        preparedStmt.setString(5, denunciamod.getZona());
-        preparedStmt.setDate(6, (Date) denunciamod.getFechaRegistro());
+        preparedStmt.setString(1, denunciamod.getCodigoD());
+        preparedStmt.setString(2, denunciamod.getDescripcionD());
+        preparedStmt.setString(3, denunciamod.getEstadoD());
+        preparedStmt.setString(4, denunciamod.getFoto1evidencia());
+        preparedStmt.setDate(6, (Date) denunciamod.getFechaRegistroD());
         
 
         
-        if (!"".equals(denunciamod.getRutaImagenEvidencia())) {
-            File file = new File(denunciamod.getRutaImagenEvidencia());
+        if (!"".equals(denunciamod.getFoto1evidencia())) {
+            File file = new File(denunciamod.getFoto1evidencia());
             try {
                 fis = new FileInputStream(file);
                 preparedStmt.setBinaryStream(8, fis, (int) file.length());
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(BaseDatos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            preparedStmt.setString(9, denunciamod.getCodigo());
+            preparedStmt.setString(9, denunciamod.getCodigoD());
 
             preparedStmt.executeUpdate();
             preparedStmt.close();
@@ -169,7 +168,7 @@ public class BaseDatos {
                 fis = new FileInputStream(imageFile);
                 preparedStmt.setBinaryStream(8, fis, (int) imageFile.length());
 
-                preparedStmt.setString(9, denunciamod.getCodigo());
+                preparedStmt.setString(9, denunciamod.getCodigoD());
 
                 preparedStmt.executeUpdate();
                 preparedStmt.close();
