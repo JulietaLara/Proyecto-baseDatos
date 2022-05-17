@@ -18,19 +18,27 @@ public class Denuncia {
     private String codigoD; 
     private String descripcionD; 
     private String estadoD; 
-    private Date fechaRegistroD; 
+    private String fechaRegistroD; 
     private String foto1evidencia; 
 
     public Denuncia() {
     }
 
-    public Denuncia(String codigoD, String descripcionD, String estadoD, Date fechaRegistroD, String foto1evidencia) {
+    public Denuncia(String codigoD, String descripcionD, String estadoD, String fechaRegistroD, String foto1evidencia) {
         this.codigoD = codigoD;
         this.descripcionD = descripcionD;
         this.estadoD = estadoD;
         this.fechaRegistroD = fechaRegistroD;
         this.foto1evidencia = foto1evidencia;
     }
+
+    public Denuncia(String descripcionD, String estadoD, String fechaRegistroD, String foto1evidencia) {
+        this.descripcionD = descripcionD;
+        this.estadoD = estadoD;
+        this.fechaRegistroD = fechaRegistroD;
+        this.foto1evidencia = foto1evidencia;
+    }
+    
 
     public String getCodigoD() {
         return codigoD;
@@ -56,11 +64,11 @@ public class Denuncia {
         this.estadoD = estadoD;
     }
 
-    public Date getFechaRegistroD() {
+    public String getFechaRegistroD() {
         return fechaRegistroD;
     }
 
-    public void setFechaRegistroD(Date fechaRegistroD) {
+    public void setFechaRegistroD(String fechaRegistroD) {
         this.fechaRegistroD = fechaRegistroD;
     }
 

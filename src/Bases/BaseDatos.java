@@ -144,7 +144,7 @@ public class BaseDatos {
         preparedStmt.setString(2, denunciamod.getDescripcionD());
         preparedStmt.setString(3, denunciamod.getEstadoD());
         preparedStmt.setString(4, denunciamod.getFoto1evidencia());
-        preparedStmt.setDate(6, (Date) denunciamod.getFechaRegistroD());
+        //preparedStmt.setString(5, denunciamod.getFechaRegistroD()); 
         
 
         

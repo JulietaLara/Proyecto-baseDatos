@@ -23,6 +23,13 @@ public class Zona {
         this.descripcionZ = descripcionZ;
     }
 
+    public Zona(String nombreZ, String descripcionZ) {
+        this.nombreZ = nombreZ;
+        this.descripcionZ = descripcionZ;
+    }
+    
+    
+
     public int getIdZona() {
         return idZona;
     }

@@ -20,12 +20,12 @@ public class Representante {
     private String telefonoR;
     private String correoR;
     private String passR;
-    private Date fechaRegistroR;
+    private String fechaRegistroR;
 
     public Representante() {
     }
 
-    public Representante(String idR, String nombre1R, String nombre2R, String apellido1R, String apeliido2R, String telefonoR, String correoR, String passR, Date fechaRegistroR) {
+    public Representante(String idR, String nombre1R, String nombre2R, String apellido1R, String apeliido2R, String telefonoR, String correoR, String passR, String fechaRegistroR) {
         this.idR = idR;
         this.nombre1R = nombre1R;
         this.nombre2R = nombre2R;
@@ -101,11 +101,11 @@ public class Representante {
         this.passR = passR;
     }
 
-    public Date getFechaRegistroR() {
+    public String getFechaRegistroR() {
         return fechaRegistroR;
     }
 
-    public void setFechaRegistroR(Date fechaRegistroR) {
+    public void setFechaRegistroR(String fechaRegistroR) {
         this.fechaRegistroR = fechaRegistroR;
     }
 

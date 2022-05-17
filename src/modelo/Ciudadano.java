@@ -20,12 +20,12 @@ public class Ciudadano {
     private String telefonoC; 
     private String correoC; 
     private String passC;
-    private Date fechaRegistroC;
+    private String fechaRegistroC;
 
     public Ciudadano() {
     }
 
-    public Ciudadano(String idCiudadano, String nombre1C, String nombre2C, String apellido1C, String apellido2C, String telefonoC, String correoC, String passC, Date fechaRegistroC) {
+    public Ciudadano(String idCiudadano, String nombre1C, String nombre2C, String apellido1C, String apellido2C, String telefonoC, String correoC, String passC, String fechaRegistroC) {
         this.idCiudadano = idCiudadano;
         this.nombre1C = nombre1C;
         this.nombre2C = nombre2C;
@@ -36,6 +36,8 @@ public class Ciudadano {
         this.passC = passC;
         this.fechaRegistroC = fechaRegistroC;
     }
+    
+    
 
     public String getIdCiudadano() {
         return idCiudadano;
@@ -101,11 +103,11 @@ public class Ciudadano {
         this.passC = passC;
     }
 
-    public Date getFechaRegistroC() {
+    public String getFechaRegistroC() {
         return fechaRegistroC;
     }
 
-    public void setFechaRegistroC(Date fechaRegistroC) {
+    public void setFechaRegistroC(String fechaRegistroC) {
         this.fechaRegistroC = fechaRegistroC;
     }
 

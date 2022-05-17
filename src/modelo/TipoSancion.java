@@ -11,16 +11,21 @@ package modelo;
  */
 public class TipoSancion {
     private int idTS;
-    private String nombreTS;
     private String ArticuloTS;
+    private char penaAumentada; 
 
     public TipoSancion() {
     }
 
-    public TipoSancion(int idTS, String nombreTS, String ArticuloTS) {
+    public TipoSancion(int idTS, String ArticuloTS, char penaAumentada) {
         this.idTS = idTS;
-        this.nombreTS = nombreTS;
         this.ArticuloTS = ArticuloTS;
+        this.penaAumentada = penaAumentada;
+    }
+
+    public TipoSancion(String ArticuloTS, char penaAumentada) {
+        this.ArticuloTS = ArticuloTS;
+        this.penaAumentada = penaAumentada;
     }
 
     public int getIdTS() {
@@ -31,14 +36,6 @@ public class TipoSancion {
         this.idTS = idTS;
     }
 
-    public String getNombreTS() {
-        return nombreTS;
-    }
-
-    public void setNombreTS(String nombreTS) {
-        this.nombreTS = nombreTS;
-    }
-
     public String getArticuloTS() {
         return ArticuloTS;
     }
@@ -47,10 +44,22 @@ public class TipoSancion {
         this.ArticuloTS = ArticuloTS;
     }
 
+    public char getPenaAumentada() {
+        return penaAumentada;
+    }
+
+    public void setPenaAumentada(char penaAumentada) {
+        this.penaAumentada = penaAumentada;
+    }
+
     @Override
     public String toString() {
-        return "TipoSancion{" + "idTS=" + idTS + ", nombreTS=" + nombreTS + ", ArticuloTS=" + ArticuloTS + '}';
+        return "TipoSancion{" + "idTS=" + idTS + ", ArticuloTS=" + ArticuloTS + ", penaAumentada=" + penaAumentada + '}';
     }
+    
+    
+
+   
     
     
 

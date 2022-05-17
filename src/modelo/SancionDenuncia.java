@@ -14,7 +14,7 @@ import java.util.Date;
 public class SancionDenuncia {
 
     private int idS;
-    private Date fecharegistroS;
+    private String fecharegistroS;
     private int condena;
     private double CantidadSM;
     private String Estado;
@@ -22,7 +22,7 @@ public class SancionDenuncia {
     public SancionDenuncia() {
     }
 
-    public SancionDenuncia(int idS, Date fecharegistroS, int condena, double CantidadSM, String Estado) {
+    public SancionDenuncia(int idS, String fecharegistroS, int condena, double CantidadSM, String Estado) {
         this.idS = idS;
         this.fecharegistroS = fecharegistroS;
         this.condena = condena;
@@ -38,11 +38,11 @@ public class SancionDenuncia {
         this.idS = idS;
     }
 
-    public Date getFecharegistroS() {
+    public String getFecharegistroS() {
         return fecharegistroS;
     }
 
-    public void setFecharegistroS(Date fecharegistroS) {
+    public void setFecharegistroS(String fecharegistroS) {
         this.fecharegistroS = fecharegistroS;
     }
 
