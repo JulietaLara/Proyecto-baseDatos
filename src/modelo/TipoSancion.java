@@ -12,7 +12,7 @@ package modelo;
 public class TipoSancion {
     private int idTS;
     private String ArticuloTS;
-    private char penaAumentada; 
+    private char penaAumentadaTS; 
 
     public TipoSancion() {
     }
@@ -20,12 +20,12 @@ public class TipoSancion {
     public TipoSancion(int idTS, String ArticuloTS, char penaAumentada) {
         this.idTS = idTS;
         this.ArticuloTS = ArticuloTS;
-        this.penaAumentada = penaAumentada;
+        this.penaAumentadaTS = penaAumentada;
     }
 
     public TipoSancion(String ArticuloTS, char penaAumentada) {
         this.ArticuloTS = ArticuloTS;
-        this.penaAumentada = penaAumentada;
+        this.penaAumentadaTS = penaAumentada;
     }
 
     public int getIdTS() {
@@ -45,16 +45,16 @@ public class TipoSancion {
     }
 
     public char getPenaAumentada() {
-        return penaAumentada;
+        return penaAumentadaTS;
     }
 
     public void setPenaAumentada(char penaAumentada) {
-        this.penaAumentada = penaAumentada;
+        this.penaAumentadaTS = penaAumentada;
     }
 
     @Override
     public String toString() {
-        return "TipoSancion{" + "idTS=" + idTS + ", ArticuloTS=" + ArticuloTS + ", penaAumentada=" + penaAumentada + '}';
+        return "TipoSancion{" + "idTS=" + idTS + ", ArticuloTS=" + ArticuloTS + ", penaAumentada=" + penaAumentadaTS + '}';
     }
     
     
