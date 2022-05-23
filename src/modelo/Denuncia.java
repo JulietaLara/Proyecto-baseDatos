@@ -19,7 +19,7 @@ public class Denuncia {
     private String descripcionD; 
     private String estadoD; 
     private String fechaRegistroD; 
-    private String foto1evidencia; 
+    private String foto1Evidencia; 
 
     public Denuncia() {
     }
@@ -29,14 +29,14 @@ public class Denuncia {
         this.descripcionD = descripcionD;
         this.estadoD = estadoD;
         this.fechaRegistroD = fechaRegistroD;
-        this.foto1evidencia = foto1evidencia;
+        this.foto1Evidencia = foto1evidencia;
     }
 
     public Denuncia(String descripcionD, String estadoD, String fechaRegistroD, String foto1evidencia) {
         this.descripcionD = descripcionD;
         this.estadoD = estadoD;
         this.fechaRegistroD = fechaRegistroD;
-        this.foto1evidencia = foto1evidencia;
+        this.foto1Evidencia = foto1evidencia;
     }
     
 
@@ -73,16 +73,16 @@ public class Denuncia {
     }
 
     public String getFoto1evidencia() {
-        return foto1evidencia;
+        return foto1Evidencia;
     }
 
     public void setFoto1evidencia(String foto1evidencia) {
-        this.foto1evidencia = foto1evidencia;
+        this.foto1Evidencia = foto1evidencia;
     }
 
     @Override
     public String toString() {
-        return "Denuncia{" + "codigoD=" + codigoD + ", descripcionD=" + descripcionD + ", estadoD=" + estadoD + ", fechaRegistroD=" + fechaRegistroD + ", foto1evidencia=" + foto1evidencia + '}';
+        return "Denuncia{" + "codigoD=" + codigoD + ", descripcionD=" + descripcionD + ", estadoD=" + estadoD + ", fechaRegistroD=" + fechaRegistroD + ", foto1evidencia=" + foto1Evidencia + '}';
     }
 
  

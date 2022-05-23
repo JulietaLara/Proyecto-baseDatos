@@ -14,7 +14,7 @@ import java.util.Date;
 public class SancionDenuncia {
 
     private int idS;
-    private String fecharegistroS;
+    private String fechaRegistroS;
     private int condena;
     private double CantidadSM;
     private String Estado;
@@ -24,7 +24,7 @@ public class SancionDenuncia {
 
     public SancionDenuncia(int idS, String fecharegistroS, int condena, double CantidadSM, String Estado) {
         this.idS = idS;
-        this.fecharegistroS = fecharegistroS;
+        this.fechaRegistroS = fecharegistroS;
         this.condena = condena;
         this.CantidadSM = CantidadSM;
         this.Estado = Estado;
@@ -39,11 +39,11 @@ public class SancionDenuncia {
     }
 
     public String getFecharegistroS() {
-        return fecharegistroS;
+        return fechaRegistroS;
     }
 
     public void setFecharegistroS(String fecharegistroS) {
-        this.fecharegistroS = fecharegistroS;
+        this.fechaRegistroS = fecharegistroS;
     }
 
     public int getCondena() {
@@ -72,7 +72,7 @@ public class SancionDenuncia {
 
     @Override
     public String toString() {
-        return "SancionDenuncia{" + "idS=" + idS + ", fecharegistroS=" + fecharegistroS + ", condena=" + condena + ", CantidadSM=" + CantidadSM + ", Estado=" + Estado + '}';
+        return "SancionDenuncia{" + "idS=" + idS + ", fecharegistroS=" + fechaRegistroS + ", condena=" + condena + ", CantidadSM=" + CantidadSM + ", Estado=" + Estado + '}';
     }
 
 }
