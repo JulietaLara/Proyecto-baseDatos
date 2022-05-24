@@ -27,6 +27,6 @@ public class Img extends javax.swing.JPanel {
         Dimension height=getSize();
         ImageIcon img=new ImageIcon(getClass().getResource(ruta));
         
-        g.drawImage(img.getImage(),0,0, WIDTH, WIDTH, this)
+        //g.drawImage(img.getImage(),0,0, WIDTH, WIDTH, this)
     }
 }

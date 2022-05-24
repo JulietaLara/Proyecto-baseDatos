@@ -152,7 +152,7 @@ public class ConexionBD {
             ResultSet rs = st.executeQuery(sqlQuery);
             
             while (rs.next()) {
-                perfil = rs.getObject("perfil").toString();
+                perfil = rs.getObject("nombre1C").toString();
                 arrayElementos.add(perfil);
             } //fin while
             
