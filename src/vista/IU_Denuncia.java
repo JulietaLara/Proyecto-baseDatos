@@ -19,15 +19,17 @@ import modelo.Denuncia;
 public class IU_Denuncia extends javax.swing.JFrame {
 
     
-    Denuncia objDenuncia;
-    ArrayList<Denuncia> arrDenuncia;
-    File filesObj;
-    String Rutaimage ;
+   FileController img= new FileController();
     /**
      * Creates new form Denuncia
      */
     public IU_Denuncia() {
         initComponents();
+        
+         int x= jPanel1.getWidth();
+         int y= jPanel1.getHeight();
+         
+         
     }
 
     /**
@@ -47,10 +49,10 @@ public class IU_Denuncia extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,13 +86,22 @@ public class IU_Denuncia extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         jButton3.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
         jButton3.setText("Cancelar");
 
         jButton4.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
         jButton4.setText("Limpiar");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,10 +123,10 @@ public class IU_Denuncia extends javax.swing.JFrame {
                         .addGap(149, 149, 149)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
-                                .addComponent(jButton2))))
+                                .addComponent(jButton2))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(219, 219, 219)
                         .addComponent(jLabel1))
@@ -126,7 +137,7 @@ public class IU_Denuncia extends javax.swing.JFrame {
                         .addComponent(jButton4)
                         .addGap(39, 39, 39)
                         .addComponent(jButton3)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,8 +152,8 @@ public class IU_Denuncia extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
@@ -160,30 +171,12 @@ public class IU_Denuncia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         FileController objfile = new FileController();
-        filesObj = objfile.cargarArchivos("JPG file", "PNG file", "jpg", "png");
-        
-     
-            Rutaimage = filesObj.getAbsolutePath();
-            System.out.println("ruta imagen "+filesObj.getAbsolutePath());
-            //BufferedImage buffered = (BufferedImage) image;
-            jLabel9.setIcon(new javax.swing.ImageIcon(filesObj.getAbsolutePath()));
+      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String Descripcion=jTextArea1.getText();
-        String Evidencia=jLabel9.getText();
-        ConexionBD objcc= new ConexionBD();
-        Denuncia objf=new Denuncia(Descripcion, Evidencia);
-        
-        boolean t=objcc.insertDenuncia(objf);
-        
-        if(t){
-            JOptionPane.showMessageDialog(null,"Denuncia Agregada con Exito");
-        }else{
-            JOptionPane.showMessageDialog(null,"Error al Agregar la denuncia");
-        }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -233,7 +226,7 @@ public class IU_Denuncia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

@@ -20,8 +20,12 @@ import modelo.ConexionBD;
 public class UI_CrearCuenta extends javax.swing.JFrame {
 
     
+    Ciudadano objCliente;
+    ArrayList<Ciudadano> arrayCiudadanos;
     public UI_CrearCuenta() {
         initComponents();
+        objCliente = new Ciudadano ();
+        arrayCiudadanos = new ArrayList<>();
     }
     /**
      * Creates new form UI_CrearCuenta
@@ -240,26 +244,22 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
-        Ciudadano objc= new Ciudadano();
-        ConexionBD objbd= new ConexionBD();
-        
-        String pass= new String(jPasswordField1.getPassword());
-        String Nuevopass= Hash.sha1(pass);
-        
-        objc.setIdCiudadano(jTextField5.getText());
-        objc.setNombre1C(jTextField1.getText());
-        objc.setNombre2C(jTextField2.getText());
-        objc.setApellido1C(jTextField3.getText());
-        objc.setApellido2C(jTextField4.getText());
-        objc.setTelefonoC(jTextField6.getText());
-        objc.setCorreoC(jTextField7.getText());
-        objc.setPassC(Nuevopass);
-        
-        if(objbd.registrar(objc)){
-            JOptionPane.showMessageDialog(null, "Reegistro Existoso");
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Hubo un error en el registro");
+        boolean insertar;
+        ConexionBD objBases;
+        objBases = new ConexionBD();
+        boolean conexion;
+
+        conexion=objBases.crearConexion();
+        if (conexion) {
+            insertar = objCliente.insertarCiudadanos(arrayCiudadanos);
+            if (insertar) {
+                JOptionPane.showMessageDialog(rootPane, "Se han insertado los clientes correctamente");
+                arrayCiudadanos= new ArrayList<>(); //limpiando arreglo una vez insertado los objetos en BD
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "No se pudo insertar correctamente los clientes");
+            }
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
         }
         //poner la fecha en el text fiel automatico 
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
  * @author Usuario
  */
 public class ConexionBD {
+
     public Connection conexion;
     public Statement st;
 
@@ -65,29 +67,26 @@ public class ConexionBD {
         return t;
     }
 
-   
+    public boolean insertDenuncia(Denuncia objf) {
+        boolean t = false;
 
-    public boolean insertDenuncia( Denuncia objf) {
-       boolean t=false;
-        
-        String sql="insert into Denuncia(descripcionD,foto1Evidencia)"+" values('"+objf.getDescripcionD()+"','"+objf.getFoto1evidencia()+"');";
-        ConexionBD objcbd=new ConexionBD();
-        t=objcbd.ejecutarSQL(sql);
-        
+        String sql = "insert into Denuncia(descripcionD,foto1Evidencia)" + " values('" + objf.getDescripcionD() + "','" + objf.getFoto1evidencia() + "');";
+        ConexionBD objcbd = new ConexionBD();
+        t = objcbd.ejecutarSQL(sql);
+
         return t;
     }
-    
-     public boolean registrar(Ciudadano usr){
-        
-        PreparedStatement ps=null;
-        Connection con = getConexion();
-        
-        String sql="INSERT INTO ciudadanos(idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC)"
+
+    public boolean registrar(Ciudadano usr) {
+
+        PreparedStatement ps;
+
+        String sqlInsert = "INSERT INTO ciudananos (idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC) "
                 + "VALUES(?,?,?,?,?,?,?,?)";
-        
+
         try {
-            ps= con.prepareStatement(sql);
-            
+            conexion.setAutoCommit(false);
+            ps = conexion.prepareStatement(sqlInsert);
             ps.setString(1, usr.getIdCiudadano());
             ps.setString(2, usr.getNombre1C());
             ps.setString(3, usr.getNombre2C());
@@ -96,41 +95,46 @@ public class ConexionBD {
             ps.setString(6, usr.getTelefonoC());
             ps.setString(7, usr.getCorreoC());
             ps.setString(8, usr.getPassC());
-            ps.execute();
+
+            ps.setString(8, null);
+            ps.executeUpdate();
+            ps.close();
+
+            conexion.commit();
             return true;
-            
         } catch (SQLException ex) {
-            Logger.getLogger(Ciudadano.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+
+    public boolean login(Ciudadano usr) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+
+        String sql = "SELECT idCiudadano nombre1C nombre2C apellido1C apellido2C telefonoC correoC passC FROM Ciudadano WHERE nombre1C=?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, usr.getNombre1C());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                if (usr.getPassC().equals(rs.getString(8))) {
+                    usr.setIdCiudadano(rs.getString(1));
+                    usr.setNombre1C(rs.getString(2));
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
-    
-     public boolean login(Ciudadano usr){
-         PreparedStatement ps=null;
-         ResultSet rs=null;
-         Connection con= getConexion();
-        
-         String sql ="SELECT idCiudadano nombre1C nombre2C apellido1C apellido2C telefonoC correoC passC FROM Ciudadano WHERE nombre1C=?";
-         
-         try {
-             ps=con.prepareStatement(sql);
-             ps.setString(1, usr.getNombre1C());
-             rs=ps.executeQuery();
-             
-             if(rs.next()){
-                    if(usr.getPassC().equals(rs.getString(8))){
-                        usr.setIdCiudadano(rs.getString(1));
-                        usr.setNombre1C(rs.getString(2));
-                        return true;
-                    }else{
-                        return false;
-                    }
-             }return false;
-         } catch (SQLException ex) {
-             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE,null,ex);
-             return false;
-         }
-    }
-    
-     
+
 }

@@ -8,6 +8,7 @@ package modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -138,7 +139,21 @@ public class Ciudadano extends ConexionBD{
     }
 
     
-   
+    //Método para insertar clientes desde un ArrayList
+    public boolean insertarCiudadanos(ArrayList<Ciudadano> arrayCiudadanos){
+        ConexionBD objBases=new ConexionBD();
+        boolean conexion;
+        boolean insertar=false;
+        
+        for (Ciudadano unCiudadano : arrayCiudadanos) {
+            conexion=objBases.crearConexion();
+            if (conexion) {
+                insertar = objBases.registrar(unCiudadano);
+            }
+        }
+        
+        return insertar;
+    }
     
     
     
