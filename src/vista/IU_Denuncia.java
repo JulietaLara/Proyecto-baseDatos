@@ -18,18 +18,21 @@ import modelo.Denuncia;
  */
 public class IU_Denuncia extends javax.swing.JFrame {
 
-    
-   FileController img= new FileController();
+    Denuncia objDenuncia;
+    ArrayList<Denuncia> arrayDenuncia;
+    File filesObj; //borrar cuando no se usen imágenes
+    String Rutaimagen;
+
     /**
      * Creates new form Denuncia
      */
     public IU_Denuncia() {
         initComponents();
-        
-         int x= jPanel1.getWidth();
-         int y= jPanel1.getHeight();
-         
-         
+        this.setLocationRelativeTo(null);
+        objDenuncia = new Denuncia();
+       arrayDenuncia = new ArrayList<>();
+        Rutaimagen = "";
+
     }
 
     /**
@@ -52,13 +55,13 @@ public class IU_Denuncia extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
-        jPanel1 = new javax.swing.JPanel();
         jTextField4 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
+        jLabelImagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,20 +97,19 @@ public class IU_Denuncia extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
         jButton4.setText("Limpiar");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jTextField4.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         jTextField4.setEnabled(false);
@@ -160,13 +162,15 @@ public class IU_Denuncia extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(51, 51, 51)
-                                        .addComponent(jButton2))
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jButton2))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(219, 219, 219)
                         .addComponent(jLabel1))
@@ -177,7 +181,7 @@ public class IU_Denuncia extends javax.swing.JFrame {
                         .addComponent(jButton4)
                         .addGap(39, 39, 39)
                         .addComponent(jButton3)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,8 +202,8 @@ public class IU_Denuncia extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
@@ -221,13 +225,52 @@ public class IU_Denuncia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
+        FileController objfile = new FileController();
+        filesObj = objfile.cargarArchivos("JPG file", "PNG file", "jpg", "png");
+        Rutaimagen = filesObj.getAbsolutePath();
+        System.out.println("ruta imagen " + filesObj.getAbsolutePath());
+        jLabelImagen.setIcon(new javax.swing.ImageIcon(filesObj.getAbsolutePath()));
+        
+        boolean insertar;
+        ConexionBD objBases;
+        objBases = new ConexionBD();
+        boolean conexion;
+
+        conexion=objBases.crearConexion();
+        if (conexion) {
+            insertar = objDenuncia.insertarDenuncia(arrayDenuncia);
+            if (insertar) {
+                JOptionPane.showMessageDialog(rootPane, "Se han insertado los clientes correctamente");
+                arrayDenuncia = new ArrayList<>(); //limpiando arreglo una vez insertado los objetos en BD
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "No se pudo insertar correctamente los clientes");
+            }
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-       
+        String Descripcion= jTextArea1.getText();
+        objDenuncia = new Denuncia(Descripcion,Rutaimagen);
+        arrayDenuncia.add(objDenuncia);
+        Rutaimagen="";
+        JOptionPane.showMessageDialog(rootPane, "Se agregó la denuncia");
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        jTextArea1.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jLabelImagen.setIcon(null);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,7 +322,7 @@ public class IU_Denuncia extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabelImagen;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

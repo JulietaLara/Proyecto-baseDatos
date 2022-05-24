@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -166,6 +168,41 @@ public class ConexionBD {
         }
 
         return autorizado;
+    }
+
+    boolean insertarDenuncia(Denuncia unaDenuncia) {
+        FileInputStream fis; //borrar si no hay imagen, audio o vídeo
+        PreparedStatement ps;
+        
+        String sqlInsert = "INSERT INTO denuncias (Descripcion,foto) "
+                        + "VALUES(?,?)";
+        
+        try {            
+            conexion.setAutoCommit(false);
+            ps = conexion.prepareStatement(sqlInsert);
+            ps.setString(2, unaDenuncia.getDescripcionD());
+           
+            
+            if(!unaDenuncia.getFoto1evidencia().equals("")){
+                File file = new File(unaDenuncia.getFoto1evidencia()); //borrar si no hay imagen, audio o vídeo
+                fis = new FileInputStream(file); //borrar si no hay imagen, audio o vídeo
+                ps.setBinaryStream(5, fis, (int) file.length()); //borrar si no hay imagen, audio o vídeo
+                ps.executeUpdate();
+                ps.close();
+                fis.close(); //borrar si no hay imagen, audio o vídeo
+            } else{
+                ps.setString(5, null);
+                ps.executeUpdate();
+                ps.close();
+            }
+            
+            conexion.commit();
+            return true;
+        } catch (IOException  | SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 
 }

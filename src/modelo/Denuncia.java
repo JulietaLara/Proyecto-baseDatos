@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import modelo.ConexionBD; 
+import modelo.ConexionBD;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,11 +15,12 @@ import java.util.Date;
  * @author Usuario
  */
 public class Denuncia {
-    private String codigoD; 
-    private String descripcionD; 
-    private String estadoD; 
-    private String fechaRegistroD; 
-    private String foto1Evidencia; 
+
+    private String codigoD;
+    private String descripcionD;
+    private String estadoD;
+    private String fechaRegistroD;
+    private String foto1Evidencia;
 
     public Denuncia() {
     }
@@ -36,9 +37,6 @@ public class Denuncia {
         this.descripcionD = descripcionD;
         this.foto1Evidencia = foto1Evidencia;
     }
-
-    
-    
 
     public String getCodigoD() {
         return codigoD;
@@ -85,8 +83,6 @@ public class Denuncia {
         return "Denuncia{" + "codigoD=" + codigoD + ", descripcionD=" + descripcionD + ", estadoD=" + estadoD + ", fechaRegistroD=" + fechaRegistroD + ", foto1evidencia=" + foto1Evidencia + '}';
     }
 
- 
-    
 //    public boolean insertarDenuncia(ArrayList<Denuncia> arrDen){
 //        String sql="";
 //        BaseDatos objBases=new BaseDatos();
@@ -105,6 +101,21 @@ public class Denuncia {
 //        }
 //        return insertar;
 //    }
+    public boolean insertarDenuncia(ArrayList<Denuncia> arrayDenuncia) {
 
-   
+        ConexionBD objBases = new ConexionBD();
+        boolean conexion;
+        boolean insertar = false;
+
+        for (Denuncia unaDenuncia : arrayDenuncia) {
+            conexion = objBases.crearConexion();
+            if (conexion) {
+                insertar = objBases.insertarDenuncia(unaDenuncia);
+            }
+        }
+
+        return insertar;
+    }
 }
+
+
