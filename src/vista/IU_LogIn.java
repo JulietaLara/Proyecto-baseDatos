@@ -141,30 +141,26 @@ public class IU_LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       ConexionBD objct= new ConexionBD();
-       Ciudadano mod= new Ciudadano();
        
-       String pass = new String(jPasswordField2.getPassword());
-       
-       if(!jTextField1.getText().equals("") && !pass.equals("")){
-           
-           String nuevopass=Hash.sha1(pass);
-           mod.setNombre1C(jTextField1.getText());
-           mod.setPassC(nuevopass);
-           
-           if(objct.login(mod)){
-               UI_HomePage.frmlog=null;
-               this.dispose();
-               
-               IU_Denuncia frmdenuncia=new IU_Denuncia();
-               frmdenuncia.setVisible(true);
-               
-           }else{
-               JOptionPane.showMessageDialog(null, "Datos Incorrectos");
-           }
-       }else{
-           JOptionPane.showMessageDialog(null, "Debe ingresar sus datos");
-       }
+        String user = jTextField1.getText();
+        String password =String.valueOf(jPasswordField2.getPassword()) ;
+        String passwordString = new String(password);
+          
+        boolean userAutorizado;
+        boolean conexion;
+        ConexionBD objBaseDatos = new ConexionBD();
+        conexion = objBaseDatos.crearConexion();
+        if(conexion){
+            userAutorizado = objBaseDatos.validarAutorizacionUsuario(user, passwordString);
+            if(userAutorizado) {
+                IU_Denuncia objMenuPrincipal = new IU_Denuncia();
+                objMenuPrincipal.setVisible(true);
+            } else{
+                JOptionPane.showMessageDialog(rootPane,"Usuario no autorizado");
+            }
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

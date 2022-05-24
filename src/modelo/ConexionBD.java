@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import static java.util.logging.Level.SEVERE;
 import java.util.logging.Logger;
@@ -138,6 +139,33 @@ public class ConexionBD {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+
+    public boolean validarAutorizacionUsuario(String userBuscar, String passwordBuscar) {
+        ArrayList arrayElementos = new ArrayList();
+        boolean autorizado=false;
+        String perfil="";
+        
+        String sqlQuery = "SELECT * FROM ciudadanos WHERE nombre1C= '" + userBuscar + "' AND passC= '" + passwordBuscar+"' ";
+        
+        try {
+            ResultSet rs = st.executeQuery(sqlQuery);
+            
+            while (rs.next()) {
+                perfil = rs.getObject("perfil").toString();
+                arrayElementos.add(perfil);
+            } //fin while
+            
+            if(!arrayElementos.isEmpty())
+            {
+                autorizado = true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return autorizado;
     }
 
 }
