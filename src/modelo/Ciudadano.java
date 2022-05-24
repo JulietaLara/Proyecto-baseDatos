@@ -135,7 +135,7 @@ public class Ciudadano {
     public boolean insertCiudadano(Ciudadano objcc) {
        boolean t=false;
         
-        String sql="insert into Denuncia(idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC)"+
+        String sql="insert into Ciudadanos(idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC)"+
                 " values('"+objcc.getIdCiudadano()+"','"+objcc.getNombre1C()+"','"+objcc.getNombre2C()+"','"+objcc.getApellido1C()+"'"
                 + ",'"+objcc.getApellido2C()+"','"+objcc.getTelefonoC()+"','"+objcc.getCorreoC()+"','"+objcc.getPassC()+"');";
         ConexionBD objcbd=new ConexionBD();
