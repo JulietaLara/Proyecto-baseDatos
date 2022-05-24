@@ -239,27 +239,28 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre1 = jTextField1.getText();
-        String nombre2 = jTextField2.getText();
-        String ape1 = jTextField3.getText();
-        String ape2 = jTextField4.getText();
-        String doc = jTextField5.getText();
-        String tel = jTextField6.getText();
-        String corr = jTextField7.getText();
-        String pass = new String(jPasswordField1.getPassword());
-
-        ConexionBD objcb = new ConexionBD();
-        Ciudadano objcc = new Ciudadano(doc, nombre1, nombre2, ape1, ape2, tel, corr, pass);
-
-        boolean t = objcc.insertCiudadano(objcc);
-
-        if (t) {
-            JOptionPane.showMessageDialog(null, "Cuenta Creada satisfactoriamente");
-            limpiar();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al crear la cuenta");
+      
+        Ciudadano objc= new Ciudadano();
+        ConexionBD objbd= new ConexionBD();
+        
+        String pass= new String(jPasswordField1.getPassword());
+        String Nuevopass= Hash.sha1(pass);
+        
+        objc.setIdCiudadano(jTextField5.getText());
+        objc.setNombre1C(jTextField1.getText());
+        objc.setNombre2C(jTextField2.getText());
+        objc.setApellido1C(jTextField3.getText());
+        objc.setApellido2C(jTextField4.getText());
+        objc.setTelefonoC(jTextField6.getText());
+        objc.setCorreoC(jTextField7.getText());
+        objc.setPassC(Nuevopass);
+        
+        if(objbd.registrar(objc)){
+            JOptionPane.showMessageDialog(null, "Reegistro Existoso");
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Hubo un error en el registro");
         }
-
         //poner la fecha en el text fiel automatico 
     }//GEN-LAST:event_jButton1ActionPerformed
 

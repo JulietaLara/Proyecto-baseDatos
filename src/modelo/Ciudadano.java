@@ -5,13 +5,18 @@
  */
 package modelo;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Usuario
  */
-public class Ciudadano {
+public class Ciudadano extends ConexionBD{
     private String idCiudadano;
     private String nombre1C; 
     private String nombre2C; 
@@ -132,17 +137,22 @@ public class Ciudadano {
         return "Ciudadano{" + "idCiudadano=" + idCiudadano + ", nombre1C=" + nombre1C + ", nombre2C=" + nombre2C + ", apellido1C=" + apellido1C + ", apellido2C=" + apellido2C + ", telefonoC=" + telefonoC + ", correoC=" + correoC + ", passC=" + passC + ", fechaRegistroC=" + fechaRegistroC + '}';
     }
 
-    public boolean insertCiudadano(Ciudadano objcc) {
-       boolean t=false;
-        
-        String sql="insert into Ciudadanos(idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC)"+
-                " values('"+objcc.getIdCiudadano()+"','"+objcc.getNombre1C()+"','"+objcc.getNombre2C()+"','"+objcc.getApellido1C()+"'"
-                + ",'"+objcc.getApellido2C()+"','"+objcc.getTelefonoC()+"','"+objcc.getCorreoC()+"','"+objcc.getPassC()+"');";
-        ConexionBD objcbd=new ConexionBD();
-        t=objcbd.ejecutarSQL(sql);
-        
-        return t;
-    }
+    
+   
+    
+    
+    
+//    public boolean insertCiudadano(Ciudadano objcc) {
+//       boolean t=false;
+//        
+//        String sql="insert into Ciudadanos(idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC)"+
+//                " values('"+objcc.getIdCiudadano()+"','"+objcc.getNombre1C()+"','"+objcc.getNombre2C()+"','"+objcc.getApellido1C()+"'"
+//                + ",'"+objcc.getApellido2C()+"','"+objcc.getTelefonoC()+"','"+objcc.getCorreoC()+"','"+objcc.getPassC()+"');";
+//        ConexionBD objcbd=new ConexionBD();
+//        t=objcbd.ejecutarSQL(sql);
+//        
+//        return t;
+//    }
     
    
 

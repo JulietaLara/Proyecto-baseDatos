@@ -77,6 +77,34 @@ public class ConexionBD {
         return t;
     }
     
+     public boolean registrar(Ciudadano usr){
+        
+        PreparedStatement ps=null;
+        Connection con = getConexion();
+        
+        String sql="INSERT INTO ciudadanos(idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC)"
+                + "VALUES(?,?,?,?,?,?,?,?)";
+        
+        try {
+            ps= con.prepareStatement(sql);
+            
+            ps.setString(1, usr.getIdCiudadano());
+            ps.setString(2, usr.getNombre1C());
+            ps.setString(3, usr.getNombre2C());
+            ps.setString(4, usr.getApellido1C());
+            ps.setString(5, usr.getApellido2C());
+            ps.setString(6, usr.getTelefonoC());
+            ps.setString(7, usr.getCorreoC());
+            ps.setString(8, usr.getPassC());
+            ps.execute();
+            return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Ciudadano.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
      public boolean login(Ciudadano usr){
          PreparedStatement ps=null;
          ResultSet rs=null;
