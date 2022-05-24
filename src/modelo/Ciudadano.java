@@ -36,6 +36,22 @@ public class Ciudadano {
         this.passC = passC;
         this.fechaRegistroC = fechaRegistroC;
     }
+
+    public Ciudadano(String idCiudadano, String nombre1C, String nombre2C, String apellido1C, String apellido2C, String telefonoC, String correoC, String passC) {
+        this.idCiudadano = idCiudadano;
+        this.nombre1C = nombre1C;
+        this.nombre2C = nombre2C;
+        this.apellido1C = apellido1C;
+        this.apellido2C = apellido2C;
+        this.telefonoC = telefonoC;
+        this.correoC = correoC;
+        this.passC = passC;
+    }
+
+    
+   
+
+   
     
     
 
@@ -115,6 +131,20 @@ public class Ciudadano {
     public String toString() {
         return "Ciudadano{" + "idCiudadano=" + idCiudadano + ", nombre1C=" + nombre1C + ", nombre2C=" + nombre2C + ", apellido1C=" + apellido1C + ", apellido2C=" + apellido2C + ", telefonoC=" + telefonoC + ", correoC=" + correoC + ", passC=" + passC + ", fechaRegistroC=" + fechaRegistroC + '}';
     }
+
+    public boolean insertCiudadano(Ciudadano objcc) {
+       boolean t=false;
+        
+        String sql="insert into Denuncia(idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC)"+
+                " values('"+objcc.getIdCiudadano()+"','"+objcc.getNombre1C()+"','"+objcc.getNombre2C()+"','"+objcc.getApellido1C()+"'"
+                + ",'"+objcc.getApellido2C()+"','"+objcc.getTelefonoC()+"','"+objcc.getCorreoC()+"','"+objcc.getPassC()+"');";
+        ConexionBD objcbd=new ConexionBD();
+        t=objcbd.ejecutarSQL(sql);
+        
+        return t;
+    }
+    
+   
 
    
     

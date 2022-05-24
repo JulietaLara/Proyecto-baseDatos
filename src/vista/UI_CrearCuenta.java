@@ -9,7 +9,9 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import modelo.Ciudadano;
+import modelo.ConexionBD;
 
 /**
  *
@@ -20,18 +22,6 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
     /**
      * Creates new form UI_CrearCuenta
      */
-    Ciudadano objCuenta;
-    ArrayList<Ciudadano> arrCuentas;
-    File filesObj;
-    String Rutaimage ;
-    public UI_CrearCuenta() {
-        initComponents();
-        objCuenta = new Ciudadano();
-        arrCuentas = new ArrayList<>();
-        this.setLocationRelativeTo(null);
-        Rutaimage="";
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,8 +44,6 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
@@ -86,9 +74,6 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel6.setText("Correo:");
-
-        jLabel7.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
-        jLabel7.setText("Fecha:");
 
         jLabel8.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel8.setText("Contraseña:");
@@ -190,13 +175,8 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
                                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(103, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(26, 26, 26)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(162, 162, 162))))
+                        .addComponent(jLabel1)
+                        .addGap(168, 168, 168))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -207,11 +187,7 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,28 +235,40 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String idciudadano;
-        String nombre1ciudadano;
-        String nombre2ciudadano;
-        String apellido1ciudadano;
-        String apellido2ciudadano;
-        String telefonociudadano;
-        String correociudadano;
-        String passciudadano;
-        LocalDateTime fecharegistro; 
-        
-        idciudadano = jTextField5.getText(); 
-        nombre1ciudadano = jTextField1.getText(); 
-        nombre2ciudadano = jTextField2.getText(); 
-        apellido1ciudadano = jTextField3.getText(); 
-        apellido2ciudadano = jTextField3.getText(); 
-        telefonociudadano = jTextField6.getText();  
-        correociudadano = jTextField7.getText(); 
-        passciudadano = jPasswordField1.getText(); 
-        fecharegistro= LocalDateTime.now();
+        String nombre1 = jTextField1.getText();
+        String nombre2 = jTextField2.getText();
+        String ape1 = jTextField3.getText();
+        String ape2 = jTextField4.getText();
+        String doc = jTextField5.getText();
+        String tel = jTextField6.getText();
+        String corr = jTextField7.getText();
+        String pass = new String(jPasswordField1.getPassword());
+
+        ConexionBD objcb = new ConexionBD();
+        Ciudadano objcc = new Ciudadano(doc, nombre1, nombre2, ape1, ape2, tel, corr, pass);
+
+        boolean t = objcc.insertCiudadano(objcc);
+
+        if (t) {
+            JOptionPane.showMessageDialog(null, "Cuenta Creada satisfactoriamente");
+            limpiar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al crear la cuenta");
+        }
+
         //poner la fecha en el text fiel automatico 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void limpiar() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+        jPasswordField1.setText("");
+    }
 
     /**
      * @param args the command line arguments
@@ -331,7 +319,6 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField1;
@@ -342,6 +329,5 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 }

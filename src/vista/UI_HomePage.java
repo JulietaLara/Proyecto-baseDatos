@@ -17,7 +17,8 @@ public class UI_HomePage extends javax.swing.JFrame {
     /**
      * Creates new form UI_HomePage
      */
-    
+    public static IU_LogIn frmlog;
+    public static UI_CrearCuenta frmReg;
     
     public UI_HomePage() {
         initComponents();
@@ -173,7 +174,10 @@ public class UI_HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        if(frmlog == null){
+            frmlog=new IU_LogIn ();
+            frmlog.setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -181,7 +185,10 @@ public class UI_HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        if(frmReg == null){
+            frmReg=new UI_CrearCuenta ();
+            frmReg.setVisible(true);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

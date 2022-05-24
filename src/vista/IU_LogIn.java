@@ -5,12 +5,18 @@
  */
 package vista;
 
+import javax.swing.JOptionPane;
+import modelo.Ciudadano;
+import modelo.ConexionBD;
+
 /**
  *
  * @author Usuario
  */
 public class IU_LogIn extends javax.swing.JFrame {
 
+    
+    UI_CrearCuenta frmReg;
     /**
      * Creates new form Interfaz
      */
@@ -44,19 +50,29 @@ public class IU_LogIn extends javax.swing.JFrame {
         jLabel1.setText("Inicia Sesión");
 
         jLabel2.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
-        jLabel2.setText("Usuario:");
+        jLabel2.setText("1° Nombre");
 
         jLabel3.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel3.setText("Contraseña:");
 
         jButton1.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
         jButton1.setText("Iniciar Sesión");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Perpetua", 0, 18)); // NOI18N
         jLabel4.setText("¿No tienes una cuenta?");
 
         jButton2.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
         jButton2.setText("Crear Cuenta");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel5.setText("Rol:");
@@ -71,9 +87,9 @@ public class IU_LogIn extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordField2)
@@ -123,6 +139,40 @@ public class IU_LogIn extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       ConexionBD objct= new ConexionBD();
+       Ciudadano mod= new Ciudadano();
+       
+       String pass = new String(jPasswordField2.getPassword());
+       
+       if(!jTextField1.getText().equals("") && !pass.equals("")){
+           
+           String nuevopass=Hash.sha1(pass);
+           mod.setNombre1C(jTextField1.getText());
+           mod.setPassC(nuevopass);
+           
+           if(objct.login(mod)){
+               UI_HomePage.frmlog=null;
+               this.dispose();
+               
+               IU_Denuncia frmdenuncia=new IU_Denuncia();
+               frmdenuncia.setVisible(true);
+               
+           }else{
+               JOptionPane.showMessageDialog(null, "Datos Incorrectos");
+           }
+       }else{
+           JOptionPane.showMessageDialog(null, "Debe ingresar sus datos");
+       }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(frmReg == null){
+            frmReg=new UI_CrearCuenta ();
+            frmReg.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
