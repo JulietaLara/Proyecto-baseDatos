@@ -19,6 +19,10 @@ import modelo.ConexionBD;
  */
 public class UI_CrearCuenta extends javax.swing.JFrame {
 
+    
+    public UI_CrearCuenta() {
+        initComponents();
+    }
     /**
      * Creates new form UI_CrearCuenta
      */
