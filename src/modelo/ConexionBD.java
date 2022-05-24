@@ -84,7 +84,7 @@ public class ConexionBD {
 
         PreparedStatement ps;
 
-        String sqlInsert = "INSERT INTO ciudananos (idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC) "
+        String sqlInsert = "INSERT INTO ciudadanos (idCiudadano,nombre1C,nombre2C,apellido1C,apellido2C,telefonoC,correoC,passC) "
                 + "VALUES(?,?,?,?,?,?,?,?)";
 
         try {
@@ -99,7 +99,7 @@ public class ConexionBD {
             ps.setString(7, usr.getCorreoC());
             ps.setString(8, usr.getPassC());
 
-            ps.setString(8, null);
+            
             ps.executeUpdate();
             ps.close();
 

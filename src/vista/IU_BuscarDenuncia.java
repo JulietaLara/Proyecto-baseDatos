@@ -53,12 +53,14 @@ public class IU_BuscarDenuncia extends javax.swing.JFrame {
 
         jTextField2.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         jTextField2.setText("Departamento - Localidad");
+        jTextField2.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel4.setText("Descripción:");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setEnabled(false);
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel5.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
@@ -71,13 +73,16 @@ public class IU_BuscarDenuncia extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel2.setText("Fecha:");
+        jLabel2.setEnabled(false);
 
         jTextField4.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        jTextField4.setEnabled(false);
 
         jLabel6.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel6.setText("Estado:");
 
         jTextField5.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
+        jTextField5.setEnabled(false);
 
         jButton1.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
         jButton1.setText("Volver");

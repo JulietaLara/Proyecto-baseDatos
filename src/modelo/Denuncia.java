@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import Bases.BaseDatos;
+import modelo.ConexionBD; 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;

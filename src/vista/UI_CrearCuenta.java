@@ -195,7 +195,7 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(72, 72, 72)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,7 +232,7 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jButton1)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
@@ -244,6 +244,19 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
+        String idCiudadano= jTextField5.getText(); 
+        String nombre1C=jTextField1.getText(); 
+        String nombre2C=jTextField2.getText();
+        String apellido1C=jTextField3.getText();
+        String apellido2C=jTextField4.getText();
+        String telefonoC=jTextField6.getText();
+        String correoC=jTextField7.getText();
+        String passC= String.valueOf(jPasswordField1.getPassword());
+        
+        objCliente = new Ciudadano(idCiudadano, nombre1C, nombre2C, apellido1C, 
+                apellido2C, telefonoC, correoC,passC);
+        arrayCiudadanos.add(objCliente);
+        
         boolean insertar;
         ConexionBD objBases;
         objBases = new ConexionBD();
