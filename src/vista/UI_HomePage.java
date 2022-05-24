@@ -19,7 +19,8 @@ public class UI_HomePage extends javax.swing.JFrame {
      */
     public static IU_LogIn frmlog;
     public static UI_CrearCuenta frmReg;
-    
+    IU_BuscarDenuncia frmbd;
+    IU_Denuncia frmd;
     public UI_HomePage() {
         initComponents();
     }
@@ -164,6 +165,10 @@ public class UI_HomePage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(frmd == null){
+            frmd=new IU_Denuncia();
+            frmd.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -182,6 +187,10 @@ public class UI_HomePage extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+         if(frmbd == null){
+            frmbd=new IU_BuscarDenuncia();
+            frmbd.setVisible(true);
+         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
