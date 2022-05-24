@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import modelo.ConexionBD; 
 /**
  *
  * @author Usuario
  */
-public class Ciudadano extends ConexionBD{
+public class Ciudadano  {
     private String idCiudadano;
     private String nombre1C; 
     private String nombre2C; 

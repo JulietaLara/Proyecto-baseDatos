@@ -33,11 +33,14 @@ public class ConexionBD {
     }
 
     public boolean crearConexion() {
+        String nameDB = "mineria";
+        String userDB = "root";
+        String pwdDB = "root";
         boolean t = false;
         try {
-            Class.forName("com.mysql.jdbc.Driver");                                      //user  //pass
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/mineria",
-                    "root", "root");
+            Class.forName("com.mysql.jdbc.Driver");
+            String sourceURL = "jdbc:mysql:///" + nameDB;//user  //pass
+            conexion = DriverManager.getConnection(sourceURL, userDB, pwdDB);
             st = conexion.createStatement();
             t = true;
         } catch (SQLException ex) {
