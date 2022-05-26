@@ -16,6 +16,7 @@ import modelo.ConexionBD;
  */
 public class IU_BuscarDenuncia extends javax.swing.JFrame {
 
+    IU_ModificarDenuncia frmReg;
     /**
      * Creates new form IU_BuscarDenuncia
      */
@@ -109,6 +110,11 @@ public class IU_BuscarDenuncia extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
         jButton3.setText("Modificar Denuncia");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -226,6 +232,15 @@ public class IU_BuscarDenuncia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+            if(frmReg == null){
+            frmReg=new IU_ModificarDenuncia();
+            frmReg.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
