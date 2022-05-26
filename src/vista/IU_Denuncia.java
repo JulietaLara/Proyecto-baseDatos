@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.ConexionBD;
 import modelo.Denuncia;
+import modelo.Zona;
 
 /**
  *
@@ -22,7 +23,8 @@ public class IU_Denuncia extends javax.swing.JFrame {
     ArrayList<Denuncia> arrayDenuncia;
     File filesObj; //borrar cuando no se usen imágenes
     String Rutaimagen;
-    UI_Zona frmz;
+    Zona objzona;
+    ArrayList<Zona> arrayZona;
 
     /**
      * Creates new form Denuncia
@@ -31,6 +33,8 @@ public class IU_Denuncia extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         objDenuncia = new Denuncia();
+        objzona= new Zona();
+        arrayZona = new ArrayList<>();
        arrayDenuncia = new ArrayList<>();
         Rutaimagen = "";
 
@@ -255,12 +259,17 @@ public class IU_Denuncia extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String Descripcion= jTextArea1.getText();
+        String ubicacion= jTextField5.getText(); 
+        String descripcion=jTextArea2.getText(); 
+        objzona = new Zona(ubicacion,descripcion);
         objDenuncia = new Denuncia(Descripcion,Rutaimagen);
         arrayDenuncia.add(objDenuncia);
+        arrayZona.add(objzona);
         Rutaimagen="";
         JOptionPane.showMessageDialog(rootPane, "Se agregó la denuncia");
         
-         boolean insertar;
+        boolean insertar;
+        boolean insertar2;
         ConexionBD objBases;
         objBases = new ConexionBD();
         boolean conexion;
@@ -268,9 +277,11 @@ public class IU_Denuncia extends javax.swing.JFrame {
         conexion=objBases.crearConexion();
         if (conexion) {
             insertar = objDenuncia.insertarDenuncia(arrayDenuncia);
-            if (insertar) {
+            insertar2 = objzona.insertarzonas(arrayZona);
+            if (insertar && insertar2) {
                 JOptionPane.showMessageDialog(rootPane, "Se han insertado los clientes correctamente");
                 arrayDenuncia = new ArrayList<>(); //limpiando arreglo una vez insertado los objetos en BD
+                arrayZona = new ArrayList<>();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "No se pudo insertar correctamente los clientes");
             }
