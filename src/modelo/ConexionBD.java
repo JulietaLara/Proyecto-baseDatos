@@ -215,8 +215,8 @@ public class ConexionBD {
         try {
             conexion.setAutoCommit(false);
             ps = conexion.prepareStatement(sqlInsert);
-            ps.setString(2, zona.getNombreZ());
-            ps.setString(3, zona.getDescripcionZ());
+            ps.setString(1, zona.getNombreZ());
+            ps.setString(2, zona.getDescripcionZ());
            
 
             
