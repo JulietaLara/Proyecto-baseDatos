@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.logging.Level;
 import static java.util.logging.Level.SEVERE;
@@ -79,16 +80,15 @@ public class ConexionBD {
         return t;
     }
 
-    public boolean insertDenuncia(Denuncia objf) {
-        boolean t = false;
-
-        String sql = "insert into Denuncia(descripcionD,foto1Evidencia)" + " values('" + objf.getDescripcionD() + "','" + objf.getFoto1evidencia() + "');";
-        ConexionBD objcbd = new ConexionBD();
-        t = objcbd.ejecutarSQL(sql);
-
-        return t;
-    }
-
+//    public boolean insertDenuncia(Denuncia objf) {
+//        boolean t = false;
+//
+//        String sql = "insert into Denuncia(descripcionD,foto1Evidencia)" + " values('" + objf.getDescripcionD() + "','" + objf.getFoto1evidencia() + "');";
+//        ConexionBD objcbd = new ConexionBD();
+//        t = objcbd.ejecutarSQL(sql);
+//
+//        return t;
+//    }
     public boolean registrar(Ciudadano usr) {
 
         PreparedStatement ps;
@@ -108,7 +108,6 @@ public class ConexionBD {
             ps.setString(7, usr.getCorreoC());
             ps.setString(8, usr.getPassC());
 
-            
             ps.executeUpdate();
             ps.close();
 
@@ -117,7 +116,7 @@ public class ConexionBD {
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return false;
     }
 
@@ -149,84 +148,61 @@ public class ConexionBD {
         }
     }
 
-    public boolean validarAutorizacionUsuario(String userBuscar, String passwordBuscar) {
+    public String validarAutorizacionUsuario(String userBuscar, String passwordBuscar) {
         ArrayList arrayElementos = new ArrayList();
-        boolean autorizado=false;
-        String perfil="";
-        
-        String sqlQuery = "SELECT * FROM ciudadanos WHERE nombre1C= '" + userBuscar + "' AND passC= '" + passwordBuscar+"' ";
-        
+        String idCiudadano = "";
+        String perfil = "";
+
+        String sqlQuery = "SELECT * FROM ciudadanos WHERE nombre1C= '" + userBuscar + "' AND passC= '" + passwordBuscar + "' ";
+
         try {
             ResultSet rs = st.executeQuery(sqlQuery);
-            
+
             while (rs.next()) {
-                perfil = rs.getObject("nombre1C").toString();
-                arrayElementos.add(perfil);
+                idCiudadano = rs.getString("idCiudadano");
+                //perfil = rs.getObject("nombre1C").toString();
+                //arrayElementos.add(perfil);
             } //fin while
-            
-            if(!arrayElementos.isEmpty())
-            {
-                autorizado = true;
-            }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return autorizado;
+        return idCiudadano;
     }
 
-    boolean insertarDenuncia(Denuncia unaDenuncia) {
+    public boolean insertarDenuncia(Denuncia unaDenuncia, String sql) {
         FileInputStream fis; //borrar si no hay imagen, audio o vídeo
         PreparedStatement ps;
-        
-        Random ramdomnum = new Random();
-        int value = ramdomnum.nextInt(999999 + 100000) + 100000;
-         String cod = String.valueOf(ramdomnum); 
-        
-        String sqlInsert = "INSERT INTO denuncias (descripcionD,estadoD,fechaRegistroD,foto1Evidencia) "
-                        + "VALUES(?,?,?,?,?,?,?,?)";
-        
-        try {            
-            conexion.setAutoCommit(false);
-            ps = conexion.prepareStatement(sqlInsert);
-            ps.setString(1,cod );
-            ps.setString(2, unaDenuncia.getDescripcionD());
-            ps.setString(3,unaDenuncia.getEstadoD());
-            ps.setString(4,unaDenuncia.getFechaRegistroD());
-            
-            ps.setString(6, null);
-            ps.setString(7, null);
-            ps.setString(8, null);
-           
-            
-            if(!unaDenuncia.getFoto1evidencia().equals("")){
-                File file = new File(unaDenuncia.getFoto1evidencia()); //borrar si no hay imagen, audio o vídeo
-                fis = new FileInputStream(file); //borrar si no hay imagen, audio o vídeo
-                ps.setBinaryStream(5, fis, (int) file.length()); //borrar si no hay imagen, audio o vídeo
+        boolean t = false;
+        try {
+            if (crearConexion()) {
+                conexion.setAutoCommit(false);
+                ps = conexion.prepareStatement(sql);
+                ps.setString(1, unaDenuncia.getDescripcionD());
+                ps.setString(2, unaDenuncia.getEstadoD());
+                File file = new File(unaDenuncia.getFoto1Evidencia());
+                fis = new FileInputStream(file);
+                ps.setBinaryStream(3, fis, (int) file.length());
+                ps.setString(4, unaDenuncia.getIdCiudadnoFK());
+                ps.setInt(5, unaDenuncia.getIdzonasFK());
                 ps.executeUpdate();
-                ps.close();
-                fis.close(); //borrar si no hay imagen, audio o vídeo
-            } else{
-                ps.setString(5, null);
-                
-                ps.executeUpdate();
-                ps.close();
+                conexion.commit();
+
+                return t = true;
             }
-            
-            conexion.commit();
-            return true;
-        } catch (IOException  | SQLException ex) {
+        } catch (IOException | SQLException ex) {
+            t = false;
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return false;
+
+        return t;
     }
-    
-      public boolean Zona(Zona zona) {
+
+    public boolean Zona(Zona zona) {
         Random ramdomnum = new Random();
         int value = ramdomnum.nextInt(999999 + 100000) + 100000;
-         String codz = String.valueOf(ramdomnum); 
+        String codz = String.valueOf(ramdomnum);
 
         PreparedStatement ps;
 
@@ -239,10 +215,7 @@ public class ConexionBD {
             ps.setString(1, codz);
             ps.setString(2, zona.getNombreZ());
             ps.setString(3, zona.getDescripcionZ());
-            
-           
 
-            
             ps.executeUpdate();
             ps.close();
 
@@ -251,14 +224,14 @@ public class ConexionBD {
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return false;
     }
-      
+
     public ArrayList buscarIdentificacionCliente(String buscarpor) {
         ArrayList arrayElementos = new ArrayList();
         String sqlQuery = "SELECT * FROM denuncias WHERE codigoD= '" + buscarpor + "' ";
-        
+
         try {
             ResultSet rs = st.executeQuery(sqlQuery);
             while (rs.next()) {
@@ -267,29 +240,28 @@ public class ConexionBD {
                 String descripcion = rs.getObject("descripcionD").toString();
                 String estado = rs.getObject("estadoD").toString();
                 String fechaRegistro = rs.getObject("fechaRegistroD").toString();
-              
+
                 arrayElementos.add(codigo); //0
                 arrayElementos.add(descripcion); //1
                 arrayElementos.add(estado); //2
                 arrayElementos.add(fechaRegistro); //3
-                
 
                 //borrar líneas siguientes si no hay imagen, audio o vídeo
-                if(rs.getBlob("foto")!=null) {
+                if (rs.getBlob("foto") != null) {
                     Blob blob = rs.getBlob("foto"); //borrar si no hay imagen, audio o vídeo
-                    byte[] data = blob.getBytes(1, (int) blob.length()); 
-                    BufferedImage img = null; 
-                    try { 
-                        img = ImageIO.read(new ByteArrayInputStream(data)); 
-                    } catch (IOException ex) { 
-                            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex); 
-                    } 
-                    imagen.setImagen(img); 
+                    byte[] data = blob.getBytes(1, (int) blob.length());
+                    BufferedImage img = null;
+                    try {
+                        img = ImageIO.read(new ByteArrayInputStream(data));
+                    } catch (IOException ex) {
+                        Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    imagen.setImagen(img);
                     arrayElementos.add(imagen.getImagen()); //7
-                } else{
+                } else {
                     arrayElementos.add(""); //7
                 }
-                
+
             } //fin while
 
         } catch (SQLException ex) {
@@ -297,5 +269,31 @@ public class ConexionBD {
         }
 
         return arrayElementos;
+    }
+
+    public LinkedList<Zona> consultarZonas(String sql) {
+        LinkedList<Zona> lz = new LinkedList<>();
+        ResultSet rs;
+        int idZona;
+        String nombreZ;
+        String descripcionZ;
+        if (crearConexion()) {
+            try {
+                rs = st.executeQuery(sql);
+                while (rs.next()) {
+                    idZona = rs.getInt("idZona");
+                    nombreZ = rs.getString("nombreZ");
+                    descripcionZ = rs.getString("descripcionZ");
+
+                    Zona objz = new Zona(idZona, nombreZ, descripcionZ);
+                    lz.add(objz);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return lz;
+
     }
 }

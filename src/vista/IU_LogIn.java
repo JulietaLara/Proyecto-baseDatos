@@ -131,17 +131,18 @@ public class IU_LogIn extends javax.swing.JFrame {
         String password =String.valueOf(jPasswordField2.getPassword()) ;
         String passwordString = new String(password);
           
-        boolean userAutorizado;
+        String idCiudadano;
         boolean conexion;
         ConexionBD objBaseDatos = new ConexionBD();
         conexion = objBaseDatos.crearConexion();
         if(conexion){
-            userAutorizado = objBaseDatos.validarAutorizacionUsuario(user, passwordString);
-            if(userAutorizado) {
-                UI_HomePage objMenuPrincipal = new UI_HomePage();
-                objMenuPrincipal.setVisible(true);
-            } else{
+            idCiudadano = objBaseDatos.validarAutorizacionUsuario(user, passwordString);
+            if(idCiudadano.equals("")) {
                 JOptionPane.showMessageDialog(rootPane,"Usuario no autorizado");
+            } else{
+                UI_HomePage objMenuPrincipal = new UI_HomePage();
+                objMenuPrincipal.idCiudadnadoP=idCiudadano;
+                objMenuPrincipal.setVisible(true);
             }
         } else{
             JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");

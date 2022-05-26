@@ -5,10 +5,23 @@
  */
 package Controlador;
 
+import modelo.ConexionBD;
+import modelo.Denuncia;
+
 /**
  *
  * @author Usuario
  */
 public class ControllerDenuncia {
+
+    public boolean insertDenuncia(Denuncia objDenuncia) {
+        String sql="insert into denuncias(descripcionD, estadoD, foto1Evidencia, idCiudadnoFK, idzonasFK) values(?, ?, ?, ?, ?)";
+        boolean t=false;
+        
+        ConexionBD objd=new ConexionBD();
+        t=objd.insertarDenuncia(objDenuncia, sql);
+        
+        return t;
+    }
     
 }

@@ -17,6 +17,7 @@ public class UI_HomePage extends javax.swing.JFrame {
     /**
      * Creates new form UI_HomePage
      */
+    public String idCiudadnadoP; 
     public static IU_LogIn frmlog;
     public static UI_CrearCuenta frmReg;
     IU_BuscarDenuncia frmbd;
@@ -122,7 +123,9 @@ public class UI_HomePage extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(frmd == null){
+            
             frmd=new IU_Denuncia();
+            frmd.idCiudadanop=idCiudadnadoP;
             frmd.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

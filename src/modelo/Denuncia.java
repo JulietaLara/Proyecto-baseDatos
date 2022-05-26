@@ -19,30 +19,28 @@ public class Denuncia {
     private String codigoD;
     private String descripcionD;
     private String estadoD;
-    private String fechaRegistroD;
     private String foto1Evidencia;
+    private String idCiudadnoFK;
+    private int idzonasFK;
 
     public Denuncia() {
     }
 
-    public Denuncia(String codigoD, String descripcionD, String estadoD, String fechaRegistroD, String foto1evidencia) {
+    public Denuncia(String codigoD, String descripcionD, String estadoD, String foto1Evidencia, String idCiudadnoFK, int idzonasFK) {
         this.codigoD = codigoD;
         this.descripcionD = descripcionD;
         this.estadoD = estadoD;
-        this.fechaRegistroD = fechaRegistroD;
-        this.foto1Evidencia = foto1evidencia;
+        this.foto1Evidencia = foto1Evidencia;
+        this.idCiudadnoFK = idCiudadnoFK;
+        this.idzonasFK = idzonasFK;
     }
 
-    public Denuncia(String descripcionD, String estadoD, String fechaRegistroD, String foto1Evidencia) {
+    public Denuncia(String descripcionD, String estadoD, String foto1Evidencia, String idCiudadnoFK, int idzonasFK) {
         this.descripcionD = descripcionD;
         this.estadoD = estadoD;
-        this.fechaRegistroD = fechaRegistroD;
         this.foto1Evidencia = foto1Evidencia;
-    }
-    
-    public Denuncia(String descripcionD, String foto1Evidencia) {
-        this.descripcionD = descripcionD;
-        this.foto1Evidencia = foto1Evidencia;
+        this.idCiudadnoFK = idCiudadnoFK;
+        this.idzonasFK = idzonasFK;
     }
 
     public String getCodigoD() {
@@ -69,26 +67,36 @@ public class Denuncia {
         this.estadoD = estadoD;
     }
 
-    public String getFechaRegistroD() {
-        return fechaRegistroD;
-    }
-
-    public void setFechaRegistroD(String fechaRegistroD) {
-        this.fechaRegistroD = fechaRegistroD;
-    }
-
-    public String getFoto1evidencia() {
+    public String getFoto1Evidencia() {
         return foto1Evidencia;
     }
 
-    public void setFoto1evidencia(String foto1evidencia) {
-        this.foto1Evidencia = foto1evidencia;
+    public void setFoto1Evidencia(String foto1Evidencia) {
+        this.foto1Evidencia = foto1Evidencia;
+    }
+
+    public String getIdCiudadnoFK() {
+        return idCiudadnoFK;
+    }
+
+    public void setIdCiudadnoFK(String idCiudadnoFK) {
+        this.idCiudadnoFK = idCiudadnoFK;
+    }
+
+    public int getIdzonasFK() {
+        return idzonasFK;
+    }
+
+    public void setIdzonasFK(int idzonasFK) {
+        this.idzonasFK = idzonasFK;
     }
 
     @Override
     public String toString() {
-        return "Denuncia{" + "codigoD=" + codigoD + ", descripcionD=" + descripcionD + ", estadoD=" + estadoD + ", fechaRegistroD=" + fechaRegistroD + ", foto1evidencia=" + foto1Evidencia + '}';
+        return "Denuncia{" + "codigoD=" + codigoD + ", descripcionD=" + descripcionD + ", estadoD=" + estadoD + ", foto1Evidencia=" + foto1Evidencia + ", idCiudadnoFK=" + idCiudadnoFK + ", idzonasFK=" + idzonasFK + '}';
     }
+
+  
 
 //    public boolean insertarDenuncia(ArrayList<Denuncia> arrDen){
 //        String sql="";
@@ -108,21 +116,7 @@ public class Denuncia {
 //        }
 //        return insertar;
 //    }
-    public boolean insertarDenuncia(ArrayList<Denuncia> arrayDenuncia) {
-
-        ConexionBD objBases = new ConexionBD();
-        boolean conexion;
-        boolean insertar = false;
-
-        for (Denuncia unaDenuncia : arrayDenuncia) {
-            conexion = objBases.crearConexion();
-            if (conexion) {
-                insertar = objBases.insertarDenuncia(unaDenuncia);
-            }
-        }
-
-        return insertar;
-    }
+    
 }
 
 

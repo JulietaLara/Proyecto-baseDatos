@@ -5,9 +5,12 @@
  */
 package vista;
 
+import Controlador.ControllerDenuncia;
+import Controlador.ControllerZona;
 import Controlador.FileController;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import modelo.ConexionBD;
 import modelo.Denuncia;
@@ -25,17 +28,20 @@ public class IU_Denuncia extends javax.swing.JFrame {
     String Rutaimagen;
     Zona objzona;
     ArrayList<Zona> arrayZona;
+    public String idCiudadanop;
+    LinkedList<Zona> listaz;
 
     /**
      * Creates new form Denuncia
      */
     public IU_Denuncia() {
+        listaz = new LinkedList<>();
         initComponents();
         this.setLocationRelativeTo(null);
         objDenuncia = new Denuncia();
-        objzona= new Zona();
+        objzona = new Zona();
         arrayZona = new ArrayList<>();
-       arrayDenuncia = new ArrayList<>();
+        arrayDenuncia = new ArrayList<>();
         Rutaimagen = "";
 
     }
@@ -58,20 +64,19 @@ public class IU_Denuncia extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabelImagen = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Perpetua", 1, 36)); // NOI18N
         jLabel1.setText("Registrar Denuncia");
@@ -111,17 +116,6 @@ public class IU_Denuncia extends javax.swing.JFrame {
             }
         });
 
-        jTextField4.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
-        jTextField4.setEnabled(false);
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
-        jLabel2.setText("Fecha:");
-
         jLabel3.setFont(new java.awt.Font("Perpetua", 1, 28)); // NOI18N
         jLabel3.setText("Zona");
 
@@ -144,17 +138,7 @@ public class IU_Denuncia extends javax.swing.JFrame {
             }
         });
 
-        jTextField5.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
-        jLabel7.setText("Descripción:");
-
-        jLabel8.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
-        jLabel8.setText("Ubicación:");
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,10 +149,6 @@ public class IU_Denuncia extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -183,32 +163,21 @@ public class IU_Denuncia extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap())
+                            .addComponent(jLabel6)
+                            .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton5)
-                                .addGap(91, 91, 91))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(169, 169, 169))))))
+                        .addComponent(jButton5)
+                        .addGap(91, 91, 91))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jLabel3)
+                        .addGap(30, 30, 30)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -222,32 +191,11 @@ public class IU_Denuncia extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(13, 13, 13)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(jButton5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(66, 66, 66)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -258,7 +206,18 @@ public class IU_Denuncia extends javax.swing.JFrame {
                         .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton4))))
+                            .addComponent(jButton4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(142, 142, 142)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jButton5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(28, 28, 28))
@@ -268,42 +227,53 @@ public class IU_Denuncia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String Descripcion= jTextArea1.getText();
-        String ubicacion= jTextField5.getText(); 
-        String descripcion=jTextArea2.getText(); 
-        jTextField4.setText("26/05/2022");
         jTextField6.setText("En Revision");
-        String fecha= jTextField4.getText();
-        String Estado= jTextField5.getText();
-        objzona = new Zona(ubicacion,descripcion);
-        objDenuncia = new Denuncia(Descripcion,fecha,Estado,Rutaimagen);
-        arrayDenuncia.add(objDenuncia);
-        arrayZona.add(objzona);
-        Rutaimagen="";
-        
-        
-        boolean insertar;
-        boolean insertar2;
-        ConexionBD objBases;
-        objBases = new ConexionBD();
-        boolean conexion;
-
-        conexion=objBases.crearConexion();
-        if (conexion) {
-            insertar = objDenuncia.insertarDenuncia(arrayDenuncia);
-            insertar2 = objzona.insertarzonas(arrayZona);
-            if (insertar && insertar2) {
-                JOptionPane.showMessageDialog(rootPane, "Se ha registrado la denuncia con éxito");
-                arrayDenuncia = new ArrayList<>(); //limpiando arreglo una vez insertado los objetos en BD
-                arrayZona = new ArrayList<>();
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "No se pudo registrar la denuncia");
+        String nombreZ;
+        nombreZ = jComboBox1.getSelectedItem().toString();
+        int idzona = 0;
+        for (int i = 0; i < listaz.size(); i++) {
+            if (nombreZ.equals(listaz.get(i).getNombreZ())) {
+                idzona = listaz.get(i).getIdZona();
             }
-        } else{
-            JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
         }
+
+        String Descripcion = jTextArea1.getText();
+        String Estado = jTextField6.getText();
+        objDenuncia = new Denuncia(Descripcion, Estado, Rutaimagen, idCiudadanop, idzona);
         
-     
+        ControllerDenuncia objcd=new ControllerDenuncia();
+        boolean t=objcd.insertDenuncia(objDenuncia);
+        
+        
+//        String fecha = jTextField4.getText();
+//
+//        objDenuncia = new Denuncia(Descripcion, fecha, Estado, Rutaimagen);
+//        arrayDenuncia.add(objDenuncia);
+//        arrayZona.add(objzona);
+//        Rutaimagen = "";
+//
+//        boolean insertar;
+//        boolean insertar2;
+//        ConexionBD objBases;
+//        objBases = new ConexionBD();
+//        boolean conexion;
+//
+//        conexion = objBases.crearConexion();
+//        if (conexion) {
+//            insertar = objDenuncia.insertarDenuncia(arrayDenuncia);
+//            insertar2 = objzona.insertarzonas(arrayZona);
+//            if (insertar && insertar2) {
+//                JOptionPane.showMessageDialog(rootPane, "Se ha registrado la denuncia con éxito");
+//                arrayDenuncia = new ArrayList<>(); //limpiando arreglo una vez insertado los objetos en BD
+//                arrayZona = new ArrayList<>();
+//            } else {
+//                JOptionPane.showMessageDialog(rootPane, "No se pudo registrar la denuncia");
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
+//        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -314,30 +284,37 @@ public class IU_Denuncia extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         jTextArea1.setText("");
-        
+
         jLabelImagen.setIcon(null);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-           FileController objfile = new FileController();
+        FileController objfile = new FileController();
         filesObj = objfile.cargarArchivos("JPG file", "PNG file", "jpg", "png");
         Rutaimagen = filesObj.getAbsolutePath();
         System.out.println("ruta imagen " + filesObj.getAbsolutePath());
         jLabelImagen.setIcon(new javax.swing.ImageIcon(filesObj.getAbsolutePath()));
 
-       
-      
-    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-     
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        ControllerZona objz = new ControllerZona();
+        listaz = objz.consutlarZonas();
+
+        for (int i = 0; i < listaz.size(); i++) {
+            Zona zona = listaz.get(i);
+            jComboBox1.addItem(zona.getNombreZ());
+
+        }
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -383,21 +360,15 @@ public class IU_Denuncia extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
