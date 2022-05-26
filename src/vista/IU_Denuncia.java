@@ -266,7 +266,7 @@ public class IU_Denuncia extends javax.swing.JFrame {
         arrayDenuncia.add(objDenuncia);
         arrayZona.add(objzona);
         Rutaimagen="";
-        JOptionPane.showMessageDialog(rootPane, "Se agregó la denuncia");
+        
         
         boolean insertar;
         boolean insertar2;
@@ -279,11 +279,11 @@ public class IU_Denuncia extends javax.swing.JFrame {
             insertar = objDenuncia.insertarDenuncia(arrayDenuncia);
             insertar2 = objzona.insertarzonas(arrayZona);
             if (insertar && insertar2) {
-                JOptionPane.showMessageDialog(rootPane, "Se han insertado los clientes correctamente");
+                JOptionPane.showMessageDialog(rootPane, "Se ha registrado la denuncia con éxito");
                 arrayDenuncia = new ArrayList<>(); //limpiando arreglo una vez insertado los objetos en BD
                 arrayZona = new ArrayList<>();
             } else {
-                JOptionPane.showMessageDialog(rootPane, "No se pudo insertar correctamente los clientes");
+                JOptionPane.showMessageDialog(rootPane, "No se pudo registrar la denuncia");
             }
         } else{
             JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");

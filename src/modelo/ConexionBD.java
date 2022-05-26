@@ -191,7 +191,7 @@ public class ConexionBD {
                 ps.close();
                 fis.close(); //borrar si no hay imagen, audio o vídeo
             } else{
-                ps.setString(5, null);
+               
                 ps.executeUpdate();
                 ps.close();
             }
