@@ -16,7 +16,7 @@ import modelo.ConexionBD;
  */
 public class IU_BuscarDenuncia extends javax.swing.JFrame {
 
-    IU_ModificarDenuncia frmReg;
+    UI_ModificarDenuncia1 frmReg;
     /**
      * Creates new form IU_BuscarDenuncia
      */
@@ -311,7 +311,7 @@ public class IU_BuscarDenuncia extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
             if(frmReg == null){
-            frmReg=new IU_ModificarDenuncia();
+            frmReg=new UI_ModificarDenuncia1();
             frmReg.setVisible(true);
         }
         
