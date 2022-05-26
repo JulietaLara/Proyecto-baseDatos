@@ -113,6 +113,11 @@ public class IU_Denuncia extends javax.swing.JFrame {
 
         jTextField4.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         jTextField4.setEnabled(false);
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel2.setText("Fecha:");
@@ -125,6 +130,11 @@ public class IU_Denuncia extends javax.swing.JFrame {
 
         jTextField6.setFont(new java.awt.Font("Monospaced", 0, 13)); // NOI18N
         jTextField6.setEnabled(false);
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
         jButton5.setText("Cargar Imagen");
@@ -261,8 +271,12 @@ public class IU_Denuncia extends javax.swing.JFrame {
         String Descripcion= jTextArea1.getText();
         String ubicacion= jTextField5.getText(); 
         String descripcion=jTextArea2.getText(); 
+        jTextField4.setText("26/05/2022");
+        jTextField6.setText("En Revision");
+        String fecha= jTextField4.getText();
+        String Estado= jTextField5.getText();
         objzona = new Zona(ubicacion,descripcion);
-        objDenuncia = new Denuncia(Descripcion,Rutaimagen);
+        objDenuncia = new Denuncia(Descripcion,fecha,Estado,Rutaimagen);
         arrayDenuncia.add(objDenuncia);
         arrayZona.add(objzona);
         Rutaimagen="";
@@ -289,7 +303,7 @@ public class IU_Denuncia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
         }
         
-        this.dispose();
+     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -300,7 +314,6 @@ public class IU_Denuncia extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         jTextArea1.setText("");
-        jTextField4.setText("");
         
         jLabelImagen.setIcon(null);
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -316,6 +329,15 @@ public class IU_Denuncia extends javax.swing.JFrame {
        
       
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+     
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
     /**
      * @param args the command line arguments

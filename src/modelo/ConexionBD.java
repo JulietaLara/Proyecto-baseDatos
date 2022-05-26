@@ -174,13 +174,15 @@ public class ConexionBD {
         FileInputStream fis; //borrar si no hay imagen, audio o vídeo
         PreparedStatement ps;
         
-        String sqlInsert = "INSERT INTO denuncias (Descripcion,foto) "
+        String sqlInsert = "INSERT INTO denuncias (descripcionD,estadoD,fechaRegistroD,foto1Evidencia) "
                         + "VALUES(?,?,?,?,?,?,?,?)";
         
         try {            
             conexion.setAutoCommit(false);
             ps = conexion.prepareStatement(sqlInsert);
-            ps.setString(2, unaDenuncia.getDescripcionD());
+            ps.setString(1, unaDenuncia.getDescripcionD());
+            ps.setString(2,unaDenuncia.getEstadoD());
+            ps.setString(2,unaDenuncia.getFechaRegistroD());
            
             
             if(!unaDenuncia.getFoto1evidencia().equals("")){
