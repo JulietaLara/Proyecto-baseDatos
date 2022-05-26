@@ -138,7 +138,7 @@ public class IU_LogIn extends javax.swing.JFrame {
         if(conexion){
             userAutorizado = objBaseDatos.validarAutorizacionUsuario(user, passwordString);
             if(userAutorizado) {
-                IU_Denuncia objMenuPrincipal = new IU_Denuncia();
+                UI_HomePage objMenuPrincipal = new UI_HomePage();
                 objMenuPrincipal.setVisible(true);
             } else{
                 JOptionPane.showMessageDialog(rootPane,"Usuario no autorizado");

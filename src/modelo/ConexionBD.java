@@ -5,9 +5,13 @@
  */
 package modelo;
 
+import Controlador.Imagen;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,6 +23,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import static java.util.logging.Level.SEVERE;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -248,5 +253,49 @@ public class ConexionBD {
         }
         
         return false;
+    }
+      
+    public ArrayList buscarIdentificacionCliente(String buscarpor) {
+        ArrayList arrayElementos = new ArrayList();
+        String sqlQuery = "SELECT * FROM denuncias WHERE codigoD= '" + buscarpor + "' ";
+        
+        try {
+            ResultSet rs = st.executeQuery(sqlQuery);
+            while (rs.next()) {
+                Imagen imagen = new Imagen(); //borrar si no hay imagen, audio o vídeo
+                String codigo = rs.getObject("codigoD").toString();
+                String descripcion = rs.getObject("descripcionD").toString();
+                String estado = rs.getObject("estadoD").toString();
+                String fechaRegistro = rs.getObject("fechaRegistroD").toString();
+              
+                arrayElementos.add(codigo); //0
+                arrayElementos.add(descripcion); //1
+                arrayElementos.add(estado); //2
+                arrayElementos.add(fechaRegistro); //3
+                
+
+                //borrar líneas siguientes si no hay imagen, audio o vídeo
+                if(rs.getBlob("foto")!=null) {
+                    Blob blob = rs.getBlob("foto"); //borrar si no hay imagen, audio o vídeo
+                    byte[] data = blob.getBytes(1, (int) blob.length()); 
+                    BufferedImage img = null; 
+                    try { 
+                        img = ImageIO.read(new ByteArrayInputStream(data)); 
+                    } catch (IOException ex) { 
+                            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex); 
+                    } 
+                    imagen.setImagen(img); 
+                    arrayElementos.add(imagen.getImagen()); //7
+                } else{
+                    arrayElementos.add(""); //7
+                }
+                
+            } //fin while
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return arrayElementos;
     }
 }

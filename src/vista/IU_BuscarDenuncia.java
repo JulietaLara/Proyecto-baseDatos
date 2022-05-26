@@ -5,6 +5,11 @@
  */
 package vista;
 
+import java.awt.Image;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import modelo.ConexionBD;
+
 /**
  *
  * @author Usuario
@@ -71,6 +76,11 @@ public class IU_BuscarDenuncia extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
         jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel2.setText("Fecha:");
@@ -186,6 +196,36 @@ public class IU_BuscarDenuncia extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String buscarpor;
+        buscarpor = jTextField3.getText();
+        
+        boolean conexion;
+        ConexionBD objbases = new ConexionBD();
+        
+        ArrayList arrayDatos;
+        
+        conexion = objbases.crearConexion();
+        if (conexion) {
+            arrayDatos = objbases.buscarIdentificacionCliente(buscarpor);
+            if (!arrayDatos.isEmpty()) {
+                jTextField4.setText(arrayDatos.get(3).toString());
+                jTextField5.setText(arrayDatos.get(2).toString());
+                jTextArea1.setText(arrayDatos.get(1).toString());
+               
+                //Control para cliente con foto
+                if(!arrayDatos.get(7).toString().equals("")){
+                    //jLabelImagen.setIcon(new javax.swing.ImageIcon((Image) arrayDatos.get(7)));
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Denuncia no encontrada");
+            }
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
