@@ -204,5 +204,31 @@ public class ConexionBD {
         
         return false;
     }
+    
+      public boolean Zona(Zona zona) {
 
+        PreparedStatement ps;
+
+        String sqlInsert = "INSERT INTO zonas (nombreZ,descripcionZ) "
+                + "VALUES(?,?)";
+
+        try {
+            conexion.setAutoCommit(false);
+            ps = conexion.prepareStatement(sqlInsert);
+            ps.setString(2, zona.getNombreZ());
+            ps.setString(3, zona.getDescripcionZ());
+           
+
+            
+            ps.executeUpdate();
+            ps.close();
+
+            conexion.commit();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
 }

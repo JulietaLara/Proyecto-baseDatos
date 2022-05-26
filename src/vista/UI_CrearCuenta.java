@@ -274,6 +274,8 @@ public class UI_CrearCuenta extends javax.swing.JFrame {
         } else{
             JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
         }
+        limpiar();
+        this.dispose();
         //poner la fecha en el text fiel automatico 
     }//GEN-LAST:event_jButton1ActionPerformed
 

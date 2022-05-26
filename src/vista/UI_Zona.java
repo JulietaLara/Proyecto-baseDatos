@@ -5,17 +5,26 @@
  */
 package vista;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import modelo.ConexionBD;
+import modelo.Zona;
+
 /**
  *
  * @author Usuario
  */
 public class UI_Zona extends javax.swing.JFrame {
 
+    Zona objzona;
+    ArrayList<Zona> arrayZona;
     /**
      * Creates new form UI_Zona
      */
     public UI_Zona() {
         initComponents();
+        objzona = new Zona();
+        arrayZona= new ArrayList<>();
     }
 
     /**
@@ -154,6 +163,32 @@ public class UI_Zona extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         String ubicacion= jTextField5.getText(); 
+        String descripcion=jTextArea1.getText(); 
+       ;
+        
+        objzona = new Zona(ubicacion, descripcion);
+        arrayZona.add(objzona);
+        
+        boolean insertar;
+        ConexionBD objBases;
+        objBases = new ConexionBD();
+        boolean conexion;
+
+        conexion=objBases.crearConexion();
+        if (conexion) {
+            insertar = objzona.insertarzonas(arrayZona);
+            if (insertar) {
+                JOptionPane.showMessageDialog(rootPane, "Se ha Insertado la zona");
+                arrayZona= new ArrayList<>(); //limpiando arreglo una vez insertado los objetos en BD
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "No se pudo insertar la zona correctamente ");
+            }
+        } else{
+            JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
+        }
+  
+        this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

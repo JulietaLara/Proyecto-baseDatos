@@ -87,6 +87,11 @@ public class IU_BuscarDenuncia extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
         jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Perpetua", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 51, 51));
@@ -176,6 +181,11 @@ public class IU_BuscarDenuncia extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

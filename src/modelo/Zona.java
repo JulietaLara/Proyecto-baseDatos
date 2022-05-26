@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Felipe
@@ -59,5 +61,18 @@ public class Zona {
         return "Zona{" + "idZona=" + idZona + ", nombreZ=" + nombreZ + ", descripcionZ=" + descripcionZ + '}';
     }
     
-    
+    public boolean insertarzonas(ArrayList<Zona> arrayZona){
+        ConexionBD objBases=new ConexionBD();
+        boolean conexion;
+        boolean insertar=false;
+        
+        for (Zona unaZona : arrayZona) {
+            conexion=objBases.crearConexion();
+            if (conexion) {
+                insertar = objBases.Zona(unaZona);
+            }
+        }
+        
+        return insertar;
+    }
 }

@@ -22,6 +22,7 @@ public class IU_Denuncia extends javax.swing.JFrame {
     ArrayList<Denuncia> arrayDenuncia;
     File filesObj; //borrar cuando no se usen imágenes
     String Rutaimagen;
+    UI_Zona frmz;
 
     /**
      * Creates new form Denuncia
@@ -230,14 +231,14 @@ public class IU_Denuncia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FileController objfile = new FileController();
-        filesObj = objfile.cargarArchivos("JPG file", "PNG file", "jpg", "png");
-        Rutaimagen = filesObj.getAbsolutePath();
-        System.out.println("ruta imagen " + filesObj.getAbsolutePath());
-        jLabelImagen.setIcon(new javax.swing.ImageIcon(filesObj.getAbsolutePath()));
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String Descripcion= jTextArea1.getText();
+        objDenuncia = new Denuncia(Descripcion,Rutaimagen);
+        arrayDenuncia.add(objDenuncia);
+        Rutaimagen="";
+        JOptionPane.showMessageDialog(rootPane, "Se agregó la denuncia");
         
-        boolean insertar;
+         boolean insertar;
         ConexionBD objBases;
         objBases = new ConexionBD();
         boolean conexion;
@@ -254,15 +255,8 @@ public class IU_Denuncia extends javax.swing.JFrame {
         } else{
             JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String Descripcion= jTextArea1.getText();
-        objDenuncia = new Denuncia(Descripcion,Rutaimagen);
-        arrayDenuncia.add(objDenuncia);
-        Rutaimagen="";
-        JOptionPane.showMessageDialog(rootPane, "Se agregó la denuncia");
-
+        
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -280,7 +274,22 @@ public class IU_Denuncia extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+           FileController objfile = new FileController();
+        filesObj = objfile.cargarArchivos("JPG file", "PNG file", "jpg", "png");
+        Rutaimagen = filesObj.getAbsolutePath();
+        System.out.println("ruta imagen " + filesObj.getAbsolutePath());
+        jLabelImagen.setIcon(new javax.swing.ImageIcon(filesObj.getAbsolutePath()));
+
+       
+      
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         if(frmz == null){
+            frmz=new UI_Zona();
+            frmz.setVisible(true);
+         }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
