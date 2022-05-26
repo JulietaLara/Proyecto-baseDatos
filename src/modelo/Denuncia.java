@@ -33,6 +33,13 @@ public class Denuncia {
         this.foto1Evidencia = foto1evidencia;
     }
 
+    public Denuncia(String descripcionD, String estadoD, String fechaRegistroD, String foto1Evidencia) {
+        this.descripcionD = descripcionD;
+        this.estadoD = estadoD;
+        this.fechaRegistroD = fechaRegistroD;
+        this.foto1Evidencia = foto1Evidencia;
+    }
+    
     public Denuncia(String descripcionD, String foto1Evidencia) {
         this.descripcionD = descripcionD;
         this.foto1Evidencia = foto1Evidencia;

@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import static java.util.logging.Level.SEVERE;
 import java.util.logging.Logger;
@@ -174,15 +175,24 @@ public class ConexionBD {
         FileInputStream fis; //borrar si no hay imagen, audio o vídeo
         PreparedStatement ps;
         
+        Random ramdomnum = new Random();
+        int value = ramdomnum.nextInt(999999 + 100000) + 100000;
+         String cod = String.valueOf(ramdomnum); 
+        
         String sqlInsert = "INSERT INTO denuncias (descripcionD,estadoD,fechaRegistroD,foto1Evidencia) "
                         + "VALUES(?,?,?,?,?,?,?,?)";
         
         try {            
             conexion.setAutoCommit(false);
             ps = conexion.prepareStatement(sqlInsert);
-            ps.setString(1, unaDenuncia.getDescripcionD());
-            ps.setString(2,unaDenuncia.getEstadoD());
-            ps.setString(2,unaDenuncia.getFechaRegistroD());
+            ps.setString(1,cod );
+            ps.setString(2, unaDenuncia.getDescripcionD());
+            ps.setString(3,unaDenuncia.getEstadoD());
+            ps.setString(4,unaDenuncia.getFechaRegistroD());
+            
+            ps.setString(6, null);
+            ps.setString(7, null);
+            ps.setString(8, null);
            
             
             if(!unaDenuncia.getFoto1evidencia().equals("")){
@@ -193,7 +203,8 @@ public class ConexionBD {
                 ps.close();
                 fis.close(); //borrar si no hay imagen, audio o vídeo
             } else{
-                ps.setString(4, null);
+                ps.setString(5, null);
+                
                 ps.executeUpdate();
                 ps.close();
             }
@@ -208,6 +219,9 @@ public class ConexionBD {
     }
     
       public boolean Zona(Zona zona) {
+        Random ramdomnum = new Random();
+        int value = ramdomnum.nextInt(999999 + 100000) + 100000;
+         String codz = String.valueOf(ramdomnum); 
 
         PreparedStatement ps;
 
@@ -217,8 +231,10 @@ public class ConexionBD {
         try {
             conexion.setAutoCommit(false);
             ps = conexion.prepareStatement(sqlInsert);
+            ps.setString(1, codz);
             ps.setString(2, zona.getNombreZ());
             ps.setString(3, zona.getDescripcionZ());
+            
            
 
             
