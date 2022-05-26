@@ -175,7 +175,7 @@ public class ConexionBD {
         PreparedStatement ps;
         
         String sqlInsert = "INSERT INTO denuncias (Descripcion,foto) "
-                        + "VALUES(?,?)";
+                        + "VALUES(?,?,?,?,?,?,?,?)";
         
         try {            
             conexion.setAutoCommit(false);
@@ -191,7 +191,7 @@ public class ConexionBD {
                 ps.close();
                 fis.close(); //borrar si no hay imagen, audio o vídeo
             } else{
-               
+                ps.setString(4, null);
                 ps.executeUpdate();
                 ps.close();
             }
@@ -210,13 +210,13 @@ public class ConexionBD {
         PreparedStatement ps;
 
         String sqlInsert = "INSERT INTO zonas (nombreZ,descripcionZ) "
-                + "VALUES(?,?)";
+                + "VALUES(?,?,?,?)";
 
         try {
             conexion.setAutoCommit(false);
             ps = conexion.prepareStatement(sqlInsert);
-            ps.setString(1, zona.getNombreZ());
-            ps.setString(2, zona.getDescripcionZ());
+            ps.setString(2, zona.getNombreZ());
+            ps.setString(3, zona.getDescripcionZ());
            
 
             
