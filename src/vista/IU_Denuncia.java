@@ -9,8 +9,13 @@ import Controlador.ControllerDenuncia;
 import Controlador.ControllerZona;
 import Controlador.FileController;
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.ConexionBD;
 import modelo.Denuncia;
@@ -30,6 +35,7 @@ public class IU_Denuncia extends javax.swing.JFrame {
     ArrayList<Zona> arrayZona;
     public String idCiudadanop;
     LinkedList<Zona> listaz;
+    public Statement st;
 
     /**
      * Creates new form Denuncia
@@ -147,46 +153,42 @@ public class IU_Denuncia extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addGap(45, 45, 45)
+                                        .addComponent(jButton4))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
                                 .addGap(45, 45, 45)
-                                .addComponent(jButton4))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel4)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(20, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5)
-                        .addGap(91, 91, 91))
-                    .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)))
                         .addGap(185, 185, 185)
-                        .addComponent(jLabel3)
-                        .addGap(30, 30, 30)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(30, 30, 30)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton5)
+                                    .addGap(71, 71, 71)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(219, 219, 219)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addComponent(jButton3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,13 +214,13 @@ public class IU_Denuncia extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(142, 142, 142)
+                        .addGap(65, 65, 65)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(jButton5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(28, 28, 28))
         );
@@ -227,7 +229,8 @@ public class IU_Denuncia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTextField6.setText("En Revision");
+        String cod = "";
+        jTextField6.setText("En Revisión");
         String nombreZ;
         nombreZ = jComboBox1.getSelectedItem().toString();
         int idzona = 0;
@@ -239,12 +242,31 @@ public class IU_Denuncia extends javax.swing.JFrame {
 
         String Descripcion = jTextArea1.getText();
         String Estado = jTextField6.getText();
+
         objDenuncia = new Denuncia(Descripcion, Estado, Rutaimagen, idCiudadanop, idzona);
-        
-        ControllerDenuncia objcd=new ControllerDenuncia();
-        boolean t=objcd.insertDenuncia(objDenuncia);
-        
-        
+
+        ControllerDenuncia objcd = new ControllerDenuncia();
+        boolean t = objcd.insertDenuncia(objDenuncia);
+//se intenta darle el codigo al usuario
+//        String sqlQuery = "select codigoD  from denuncias where descripcionD= '" + Descripcion + "' ";
+//        try {
+//
+//            ResultSet rs = st.executeQuery(sqlQuery);
+//            while (rs.next()) {
+//                cod = rs.getString("codigoD");
+//                System.out.println(cod);
+//                //perfil = rs.getObject("nombre1C").toString();
+//                //arrayElementos.add(perfil);
+//            } //fin while
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(IU_Denuncia.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+        JOptionPane.showMessageDialog(rootPane, "La denuncia se ha registrado"
+        //+ "\n El código de denuncia es:"+cod+"\n Por favor guarde este codigo si desea consultar su denuncia en el futuro."
+        );
+
 //        String fecha = jTextField4.getText();
 //
 //        objDenuncia = new Denuncia(Descripcion, fecha, Estado, Rutaimagen);
@@ -272,7 +294,6 @@ public class IU_Denuncia extends javax.swing.JFrame {
 //        } else {
 //            JOptionPane.showMessageDialog(rootPane, "No se pudo establecer conexión con la base de datos");
 //        }
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

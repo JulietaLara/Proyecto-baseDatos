@@ -231,24 +231,30 @@ public class ConexionBD {
     public ArrayList buscarIdentificacionCliente(String buscarpor) {
         ArrayList arrayElementos = new ArrayList();
         String sqlQuery = "SELECT * FROM denuncias WHERE codigoD= '" + buscarpor + "' ";
+       // String sqlQuery1 = "SELECT * FROM zonas WHERE nombreZ= '" + buscarpor + "' ";
 
         try {
             ResultSet rs = st.executeQuery(sqlQuery);
-            while (rs.next()) {
+            //ResultSet rs1 = st.executeQuery(sqlQuery1);
+            while (rs.next()
+                    //&&rs1.next()
+                    ) {
                 Imagen imagen = new Imagen(); //borrar si no hay imagen, audio o vídeo
                 String codigo = rs.getObject("codigoD").toString();
                 String descripcion = rs.getObject("descripcionD").toString();
                 String estado = rs.getObject("estadoD").toString();
                 String fechaRegistro = rs.getObject("fechaRegistroD").toString();
+                //String zona = rs1.getObject("nombreZ").toString();
 
                 arrayElementos.add(codigo); //0
                 arrayElementos.add(descripcion); //1
                 arrayElementos.add(estado); //2
                 arrayElementos.add(fechaRegistro); //3
+                //arrayElementos.add(zona); //4
 
                 //borrar líneas siguientes si no hay imagen, audio o vídeo
-                if (rs.getBlob("foto") != null) {
-                    Blob blob = rs.getBlob("foto"); //borrar si no hay imagen, audio o vídeo
+                if (rs.getBlob("foto1Evidencia") != null) {
+                    Blob blob = rs.getBlob("foto1Evidencia"); //borrar si no hay imagen, audio o vídeo
                     byte[] data = blob.getBytes(1, (int) blob.length());
                     BufferedImage img = null;
                     try {
