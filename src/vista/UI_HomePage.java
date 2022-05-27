@@ -22,6 +22,7 @@ public class UI_HomePage extends javax.swing.JFrame {
     public static UI_CrearCuenta frmReg;
     IU_BuscarDenuncia frmbd;
     IU_Denuncia frmd;
+    UI_ModificarDenuncia1 frmMd;
     public UI_HomePage() {
         initComponents();
     }
@@ -46,6 +47,7 @@ public class UI_HomePage extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,7 +66,7 @@ public class UI_HomePage extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
-        jButton4.setText("Consultar Una Denuncia");
+        jButton4.setText("Modificar Una Denuncia");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -74,32 +76,44 @@ public class UI_HomePage extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setText("¿Sabías que incluso en la reserva natural Farallones que bordea toda\nnuestra ciudad está siendo carcomida por la minería ilegal que poco \na poco está destruyendo su ecosistema?\n\nAquí podrás reportar y consultar acerca de las denuncias hechas de \nmanera segura las actividades de míneria ilegal en tu zona que \npresencies o sospeches.\n\nCuidar nuestros ecosistemas es labor de todos, ¡Anímate a hacer parte\ndel cambio!");
+        jTextArea1.setEnabled(false);
         jScrollPane1.setViewportView(jTextArea1);
+
+        jButton5.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
+        jButton5.setText("Consultar Una Denuncia");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5)))
+                .addGap(0, 55, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(304, 304, 304))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(81, 81, 81))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(81, 81, 81))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(65, 65, 65)
-                        .addComponent(jButton4)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jButton4)
+                        .addGap(209, 209, 209))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,11 +124,13 @@ public class UI_HomePage extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton1))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton5))
+                .addGap(31, 31, 31)
+                .addComponent(jButton4)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,11 +148,15 @@ public class UI_HomePage extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         if(frmbd == null){
-            frmbd=new IU_BuscarDenuncia();
-            frmbd.setVisible(true);
+         if(frmMd == null){
+            frmMd=new UI_ModificarDenuncia1();
+            frmMd.setVisible(true);
          }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,6 +196,7 @@ public class UI_HomePage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;

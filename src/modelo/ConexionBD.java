@@ -244,13 +244,13 @@ public class ConexionBD {
                 String descripcion = rs.getObject("descripcionD").toString();
                 String estado = rs.getObject("estadoD").toString();
                 String fechaRegistro = rs.getObject("fechaRegistroD").toString();
-                //String zona = rs1.getObject("nombreZ").toString();
+                String zona = rs.getObject("idzonasFK").toString();
 
                 arrayElementos.add(codigo); //0
                 arrayElementos.add(descripcion); //1
                 arrayElementos.add(estado); //2
                 arrayElementos.add(fechaRegistro); //3
-                //arrayElementos.add(zona); //4
+                arrayElementos.add(zona); //4
 
                 //borrar líneas siguientes si no hay imagen, audio o vídeo
                 if (rs.getBlob("foto1Evidencia") != null) {
@@ -314,6 +314,7 @@ public class ConexionBD {
                 ps.setString(3, unaSancion.getEstado());
                 ps.setInt(1, unaSancion.getCondena());
                 ps.setDouble(2,unaSancion.getCantidadSM());
+                ps.setInt(4, unaSancion.getCodigoDFK());
                 ps.executeUpdate();
                 conexion.commit();
 
@@ -335,8 +336,8 @@ public class ConexionBD {
                 conexion.setAutoCommit(false);
                 ps = conexion.prepareStatement(sql);
                 ps.setString(2,objTSancion.getArticuloTS());
-                ps.setString(3,objTSancion.getPenaAumentadaTS());
-                ps.setString(4,String.valueOf(objTSancion.getIdSFK()));
+                ps.setString(1,objTSancion.getPenaAumentadaTS());
+                ps.setString(3,String.valueOf(objTSancion.getIdSFK()));
                 ps.executeUpdate();
                 conexion.commit();
 

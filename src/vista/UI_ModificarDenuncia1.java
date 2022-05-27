@@ -7,6 +7,7 @@ package vista;
 
 import Controlador.ControllerSancion;
 import Controlador.ControllerTipoSancion;
+import javax.swing.JOptionPane;
 import modelo.SancionDenuncia;
 import modelo.TipoSancion;
 
@@ -74,6 +75,8 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Perpetua", 1, 36)); // NOI18N
         jLabel1.setText("Modificar Denuncia");
@@ -240,12 +243,23 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Perpetua", 0, 24)); // NOI18N
         jLabel18.setText("Código Denuncia:");
 
-        jTextField4.setEnabled(false);
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
             }
         });
+
+        jButton8.setFont(new java.awt.Font("Perpetua", 0, 18)); // NOI18N
+        jButton8.setText("Buscar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Perpetua", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel16.setText("*");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -292,37 +306,42 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel26)
-                        .addContainerGap(476, Short.MAX_VALUE))))
+                        .addContainerGap(546, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addGap(312, 312, 312))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(204, 204, 204))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(327, 327, 327))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton6))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(109, 109, 109)
                         .addComponent(jButton7)))
-                .addGap(0, 97, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(252, 252, 252))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(144, 144, 144))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(267, 267, 267))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,9 +349,11 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton8)
+                    .addComponent(jLabel16))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel13)
@@ -370,7 +391,7 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
                         .addComponent(jLabel25)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addComponent(jButton5)
                         .addGap(157, 157, 157))
                     .addGroup(layout.createSequentialGroup()
@@ -424,16 +445,16 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        String ArticuloTS = jTextField14.getText();
-        
-        String PenaAumentada =jTextField15.getText();
-        
-        
-
-        objTSancion = new TipoSancion(ArticuloTS, PenaAumentada);
-
-        ControllerTipoSancion objcd = new ControllerTipoSancion();
-        boolean t = objcd.insertTSancion(objTSancion);
+//        String ArticuloTS = jTextField14.getText();
+//        
+//        String PenaAumentada =jTextField15.getText();
+//        
+//        
+//
+//        objTSancion = new TipoSancion(ArticuloTS, PenaAumentada);
+//
+//        ControllerTipoSancion objcd = new ControllerTipoSancion();
+//        boolean t = objcd.insertTSancion(objTSancion);
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -446,16 +467,33 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
         String Estado = jTextField13.getText();
         int condena = Integer.valueOf(jTextField10.getText());
         double CantidadSM =Double.valueOf(jTextField12.getText());
+        int codigoDFK= Integer.valueOf(jTextField4.getText());
+        
 
-        objSancion = new SancionDenuncia(condena, CantidadSM, Estado);
+        objSancion = new SancionDenuncia(condena, CantidadSM, Estado, codigoDFK );
 
         ControllerSancion objcd = new ControllerSancion ();
         boolean t = objcd.insertSancion(objSancion);
+        
+        String ArticuloTS = jTextField14.getText();        
+        String PenaAumentada =jTextField15.getText();
+
+        objTSancion = new TipoSancion(ArticuloTS, PenaAumentada);
+
+        ControllerTipoSancion objcd1 = new ControllerTipoSancion();
+        boolean t1 = objcd1.insertTSancion(objTSancion);
+        
+        
+        JOptionPane.showMessageDialog(null, "Sanción Actualizada");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -499,6 +537,7 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -506,6 +545,7 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;

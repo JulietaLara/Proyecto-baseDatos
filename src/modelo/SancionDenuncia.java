@@ -18,22 +18,25 @@ public class SancionDenuncia {
     private int condena;
     private double CantidadSM;
     private String Estado;
+    private int codigoDFK; 
 
     public SancionDenuncia() {
     }
 
-    public SancionDenuncia(int idS, String fecharegistroS, int condena, double CantidadSM, String Estado) {
+    public SancionDenuncia(int idS, String fecharegistroS, int condena, double CantidadSM, String Estado, int codigoDFK) {
         this.idS = idS;
         this.fechaRegistroS = fecharegistroS;
         this.condena = condena;
         this.CantidadSM = CantidadSM;
         this.Estado = Estado;
+        this.codigoDFK=  codigoDFK; 
     }
 
-    public SancionDenuncia(int condena, double CantidadSM, String Estado) {
+    public SancionDenuncia(int condena, double CantidadSM, String Estado, int codigoDFK) {
         this.condena = condena;
         this.CantidadSM = CantidadSM;
         this.Estado = Estado;
+        this.codigoDFK=  codigoDFK; 
     }
 
    
@@ -78,6 +81,23 @@ public class SancionDenuncia {
     public void setEstado(String Estado) {
         this.Estado = Estado;
     }
+
+    public String getFechaRegistroS() {
+        return fechaRegistroS;
+    }
+
+    public void setFechaRegistroS(String fechaRegistroS) {
+        this.fechaRegistroS = fechaRegistroS;
+    }
+
+    public int getCodigoDFK() {
+        return codigoDFK;
+    }
+
+    public void setCodigoDFK(int codigoDFK) {
+        this.codigoDFK = codigoDFK;
+    }
+    
 
     @Override
     public String toString() {

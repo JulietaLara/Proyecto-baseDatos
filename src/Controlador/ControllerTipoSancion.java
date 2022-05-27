@@ -14,7 +14,7 @@ import modelo.TipoSancion;
  */
 public class ControllerTipoSancion {
     public boolean insertTSancion(TipoSancion objTSancion) {
-        String sql="insert into sanciones(condena, cantidadSM, estado, idSFK) values(?, ?, ?, ?)";
+        String sql="insert into tipos_sanciones(penaAumentadaTS, articuloTS, idSFK) values(?, ?, ?)";
         boolean t=false;
         
         ConexionBD objd=new ConexionBD();

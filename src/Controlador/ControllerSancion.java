@@ -15,7 +15,7 @@ import modelo.SancionDenuncia;
 public class ControllerSancion {
     
     public boolean insertSancion(SancionDenuncia objSancion) {
-        String sql="insert into sanciones(condena, cantidadSM, estado) values(?, ?, ?)";
+        String sql="insert into sanciones(condena, cantidadSM, estado, codigoDFK) values(?, ?, ?, ?)";
         boolean t=false;
         
         ConexionBD objd=new ConexionBD();
