@@ -247,6 +247,14 @@ public class IU_Denuncia extends javax.swing.JFrame {
 
         ControllerDenuncia objcd = new ControllerDenuncia();
         boolean t = objcd.insertDenuncia(objDenuncia);
+        
+        if(t){
+            
+            int id=objcd.consultarDenuncia();
+            
+            
+            JOptionPane.showMessageDialog(null, "Se registra la denuncia con exito \n El código de la denuncia es " +id);
+        }
 //se intenta darle el codigo al usuario
 //        String sqlQuery = "select codigoD  from denuncias where descripcionD= '" + Descripcion + "' ";
 //        try {

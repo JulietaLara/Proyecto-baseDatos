@@ -349,4 +349,24 @@ public class ConexionBD {
 
         return t;
     }
+
+    public int consultarDenuncias(String sql) {
+        ResultSet rs;
+        int iddenuncia=0;
+       
+        if (crearConexion()) {
+            try {
+                rs = st.executeQuery(sql);
+                while (rs.next()) {
+                    iddenuncia = rs.getInt("codigoD"); //To change body of generated methods, choose Tools | Templates.
+                    break;
+                }
+            }catch (SQLException ex) {
+                Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        }
+         return iddenuncia;
+            
+    }
 }
