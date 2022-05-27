@@ -311,9 +311,9 @@ public class ConexionBD {
             if (crearConexion()) {
                 conexion.setAutoCommit(false);
                 ps = conexion.prepareStatement(sql);
-                ps.setString(1, unaSancion.getEstado());
-                ps.setInt(2, unaSancion.getCondena());
-                ps.setDouble(3,unaSancion.getCantidadSM());
+                ps.setString(3, unaSancion.getEstado());
+                ps.setInt(1, unaSancion.getCondena());
+                ps.setDouble(2,unaSancion.getCantidadSM());
                 ps.executeUpdate();
                 conexion.commit();
 
