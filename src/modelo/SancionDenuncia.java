@@ -30,6 +30,15 @@ public class SancionDenuncia {
         this.Estado = Estado;
     }
 
+    public SancionDenuncia(int condena, double CantidadSM, String Estado) {
+        this.condena = condena;
+        this.CantidadSM = CantidadSM;
+        this.Estado = Estado;
+    }
+
+   
+    
+
     public int getIdS() {
         return idS;
     }

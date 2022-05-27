@@ -5,12 +5,16 @@
  */
 package vista;
 
+import Controlador.ControllerSancion;
+import modelo.SancionDenuncia;
+
 /**
  *
  * @author Usuario
  */
 public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
-
+    
+    SancionDenuncia objSancion;
     /**
      * Creates new form UI_ModificarDenuncia1
      */
@@ -389,7 +393,7 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField13ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
@@ -406,6 +410,14 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        String Estado = jTextField13.getText();
+        int condena = Integer.valueOf(jTextField10.getText());
+        double CantidadSM =Double.valueOf(jTextField12.getText());
+
+        objSancion = new SancionDenuncia(condena, CantidadSM, Estado);
+
+        ControllerSancion objcd = new ControllerSancion ();
+        boolean t = objcd.insertSancion(objSancion);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
