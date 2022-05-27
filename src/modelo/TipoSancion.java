@@ -13,19 +13,27 @@ public class TipoSancion {
     private int idTS;
     private String ArticuloTS;
     private String  penaAumentadaTS; 
+    private int idSFK;
 
     public TipoSancion() {
     }
 
-    public TipoSancion(int idTS, String ArticuloTS, String  penaAumentada) {
+    public TipoSancion(int idTS, String ArticuloTS, String  penaAumentada, int idSFK) {
         this.idTS = idTS;
         this.ArticuloTS = ArticuloTS;
         this.penaAumentadaTS = penaAumentada;
+        this.idSFK=  idSFK; 
     }
 
+    public TipoSancion(String ArticuloTS, String penaAumentada, int idSFK) {
+        this.ArticuloTS = ArticuloTS;
+        this.penaAumentadaTS = penaAumentada;
+        this.idSFK=  idSFK; 
+    }
     public TipoSancion(String ArticuloTS, String penaAumentada) {
         this.ArticuloTS = ArticuloTS;
         this.penaAumentadaTS = penaAumentada;
+        
     }
 
     public int getIdTS() {
@@ -53,6 +61,14 @@ public class TipoSancion {
         this.penaAumentadaTS = penaAumentada;
     }
 
+    public int getIdSFK() {
+        return idSFK;
+    }
+
+    public void setIdSFK(int idSFK) {
+        this.idSFK = idSFK;
+    }
+    
     @Override
     public String toString() {
         return "TipoSancion{" + "idTS=" + idTS + ", ArticuloTS=" + ArticuloTS + ", penaAumentada=" + penaAumentadaTS + '}';

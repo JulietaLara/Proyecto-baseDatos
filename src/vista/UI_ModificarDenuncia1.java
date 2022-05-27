@@ -427,6 +427,8 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
         String ArticuloTS = jTextField14.getText();
         
         String PenaAumentada =jTextField15.getText();
+        
+        
 
         objTSancion = new TipoSancion(ArticuloTS, PenaAumentada);
 

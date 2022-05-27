@@ -334,8 +334,9 @@ public class ConexionBD {
             if (crearConexion()) {
                 conexion.setAutoCommit(false);
                 ps = conexion.prepareStatement(sql);
-                ps.setString(1,objTSancion.getArticuloTS());
-                ps.setString(2,objTSancion.getPenaAumentadaTS());
+                ps.setString(2,objTSancion.getArticuloTS());
+                ps.setString(3,objTSancion.getPenaAumentadaTS());
+                ps.setString(4,String.valueOf(objTSancion.getIdSFK()));
                 ps.executeUpdate();
                 conexion.commit();
 
