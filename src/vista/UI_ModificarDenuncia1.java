@@ -6,7 +6,9 @@
 package vista;
 
 import Controlador.ControllerSancion;
+import Controlador.ControllerTipoSancion;
 import modelo.SancionDenuncia;
+import modelo.TipoSancion;
 
 /**
  *
@@ -15,6 +17,7 @@ import modelo.SancionDenuncia;
 public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
     
     SancionDenuncia objSancion;
+    TipoSancion objTSancion;
     /**
      * Creates new form UI_ModificarDenuncia1
      */
@@ -421,6 +424,15 @@ public class UI_ModificarDenuncia1 extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        String ArticuloTS = jTextField14.getText();
+        
+        String PenaAumentada =jTextField15.getText();
+
+        objTSancion = new TipoSancion(ArticuloTS, PenaAumentada);
+
+        ControllerTipoSancion objcd = new ControllerTipoSancion();
+        boolean t = objcd.insertTSancion(objTSancion);
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

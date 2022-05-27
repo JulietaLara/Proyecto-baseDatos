@@ -326,4 +326,26 @@ public class ConexionBD {
 
         return t;
     }
+
+    public boolean insertarTipoSancion(TipoSancion objTSancion, String sql) {
+        PreparedStatement ps;
+        boolean t = false;
+        try {
+            if (crearConexion()) {
+                conexion.setAutoCommit(false);
+                ps = conexion.prepareStatement(sql);
+                ps.setString(1,objTSancion.getArticuloTS());
+                ps.setString(2,objTSancion.getPenaAumentadaTS());
+                ps.executeUpdate();
+                conexion.commit();
+
+                return t = true;
+            }
+        } catch (SQLException ex) {
+            t = false;
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return t;
+    }
 }

@@ -12,18 +12,18 @@ package modelo;
 public class TipoSancion {
     private int idTS;
     private String ArticuloTS;
-    private char penaAumentadaTS; 
+    private String  penaAumentadaTS; 
 
     public TipoSancion() {
     }
 
-    public TipoSancion(int idTS, String ArticuloTS, char penaAumentada) {
+    public TipoSancion(int idTS, String ArticuloTS, String  penaAumentada) {
         this.idTS = idTS;
         this.ArticuloTS = ArticuloTS;
         this.penaAumentadaTS = penaAumentada;
     }
 
-    public TipoSancion(String ArticuloTS, char penaAumentada) {
+    public TipoSancion(String ArticuloTS, String penaAumentada) {
         this.ArticuloTS = ArticuloTS;
         this.penaAumentadaTS = penaAumentada;
     }
@@ -44,11 +44,12 @@ public class TipoSancion {
         this.ArticuloTS = ArticuloTS;
     }
 
-    public char getPenaAumentada() {
+    public String getPenaAumentadaTS() {
         return penaAumentadaTS;
     }
 
-    public void setPenaAumentada(char penaAumentada) {
+
+    public void setPenaAumentada(String penaAumentada) {
         this.penaAumentadaTS = penaAumentada;
     }
 
